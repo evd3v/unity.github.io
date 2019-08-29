@@ -186,6 +186,47 @@ body {
   opacity: 0;
   margin-top: -0.5rem; }
 
+/* video popup styles */
+.white-popup {
+  position: relative;
+  padding: 25px;
+  width: auto;
+  max-width: 400px;
+  margin: 0 auto; }
+
+.mfp-zoom-in {
+  /* start state */
+  /* animate in */
+  /* animate out */ }
+  .mfp-zoom-in .mfp-with-anim {
+    opacity: 0;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    -webkit-transform: scale(0.8);
+        -ms-transform: scale(0.8);
+            transform: scale(0.8); }
+  .mfp-zoom-in.mfp-bg {
+    opacity: 0;
+    -webkit-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out; }
+  .mfp-zoom-in.mfp-ready .mfp-with-anim {
+    opacity: 1;
+    -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+            transform: scale(1); }
+  .mfp-zoom-in.mfp-ready.mfp-bg {
+    opacity: 0.8; }
+  .mfp-zoom-in.mfp-removing .mfp-with-anim {
+    -webkit-transform: scale(0.8);
+        -ms-transform: scale(0.8);
+            transform: scale(0.8);
+    opacity: 0; }
+  .mfp-zoom-in.mfp-removing.mfp-bg {
+    opacity: 0; }
+
+/* end video popup styles */
 .discover-btn {
   display: block;
   width: 150px;
@@ -279,8 +320,8 @@ body {
 .page-bg {
   background: url("../img/bg.jpg");
   background-position: center;
-  height: -webkit-calc(100vh + 150px);
-  height: calc(100vh + 150px);
+  height: -webkit-calc(var(--vh, 1vh) * 100 + 150px);
+  height: calc(var(--vh, 1vh) * 100 + 150px);
   background-color: #666;
   position: absolute;
   z-index: -100;

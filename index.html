@@ -36,10 +36,13 @@
                 </h1>
             </div>
             <div class="play-video">
-                <a class="play-video__link" href="https://player.vimeo.com/video/142874198?autoplay=0">
+                <a class="play-video__link" data-effect="mfp-zoom-in" href="#play-video__content">
                     <i class="fas fa-play play-video--icon"></i>
                 </a>
                 <p class="play-video__text play-video__text--in play-video__text--out"> </p>
+                <div class="white-popup mfp-with-anim mfp-hide" id="play-video__content">
+                        <iframe title="vimeo-player" src="https://player.vimeo.com/video/142874198" frameborder="0"></iframe>
+                </div>
             </div>
             <a class="discover-btn discover-btn--wrapper" href="#">
                 Discover
@@ -82,9 +85,6 @@
     <div class="page page-z">
 
     </div>
-    <!-- <div class="page_test">
-        <img src="img/bg.jpg" alt="alt" />
-    </div> -->
 </body>
 
 </html>
