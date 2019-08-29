@@ -48,6 +48,13 @@ window.onload = function() {
     // Example 1: From an element in DOM
     $('.open-popup-link').magnificPopup({
         type:'inline',
+        removalDelay: 500, //delay removal by X to allow out-animation
+        // fixedContentPos: false,
+        callbacks: {
+            beforeOpen: function() {
+            this.st.mainClass = this.st.el.attr('data-effect');
+            },
+        },
         midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
      });
   
