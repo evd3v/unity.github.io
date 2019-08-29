@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <script src="js/common.js"></script>
     <title>Document</title>
 </head>
+
 <body>
     <header class="page page--bg">
         <div class="wrapper wrapper-flex">
@@ -18,9 +20,12 @@
                 <div class="logo__text">Unity</div>
             </div>
             <ul class="nav-social">
-                <li class="nav-social__item"><a class="nav-social__link" href="#"><i class="fab fa-facebook-f nav-social--hover"></i></a></li>
-                <li class="nav-social__item"><a class="nav-social__link" href="#"><i class="fab fa-twitter nav-social--hover"></i></i></a></li>
-                <li class="nav-social__item"><a class="nav-social__link" href="#"><i class="fas fa-camera-retro nav-social--hover"></i></a></li>
+                <li class="nav-social__item"><a class="nav-social__link" href="#"><i
+                            class="fab fa-facebook-f nav-social--hover"></i></a></li>
+                <li class="nav-social__item"><a class="nav-social__link" href="#"><i
+                            class="fab fa-twitter nav-social--hover"></i></i></a></li>
+                <li class="nav-social__item"><a class="nav-social__link" href="#"><i
+                            class="fas fa-camera-retro nav-social--hover"></i></a></li>
             </ul>
             <div class="line line--wrapper">
 
@@ -28,11 +33,11 @@
             <div class="header">
                 <h1 class="header__text">
                     It started with an idea
-                </h1>   
+                </h1>
             </div>
             <div class="play-video">
                 <a class="play-video__link" href="#">
-                        <i class="fas fa-play play-video--icon"></i>
+                    <i class="fas fa-play play-video--icon"></i>
                 </a>
                 <p class="play-video__text play-video__text--in play-video__text--out"> </p>
             </div>
@@ -41,13 +46,43 @@
             </a>
         </div>
         <div class="header-menu">
-                <a href="#header-menu__link" class="header-menu__link open-popup-link" data-effect="mfp-zoom-in"><i class="fas fa-bars fa-2x"></i></a>
+            <!-- <a href="#header-menu__link" class="header-menu__link open-popup-link" data-effect="mfp-zoom-in"><i class="fas fa-bars fa-2x"></i></a>
                 <div id="header-menu__link" class="white-popup mfp-hide mfp-with-anim" >
                         Popup contents
-                </div>
+                </div> -->
+            <a class="header-menu__link" href="#"><i class="fas fa-bars fa-2x"></i></a>
+            <div class="header-menu-overlay">
+                <ul class="header-menu-overlay__list">
+                    <li class="header-menu-overlay__item">
+                        <a href="#" class="header-menu-overlay__link"> Home </a>
+                    </li>
+                    <li class="header-menu-overlay__item">
+                        <a href="#" class="header-menu-overlay__link"> Features </a>
+                    </li>
+                    <li class="header-menu-overlay__item">
+                        <a href="#" class="header-menu-overlay__link"> Pages </a>
+                    </li>
+                    <li class="header-menu-overlay__item">
+                        <a href="#" class="header-menu-overlay__link"> Portfolio </a>
+                    </li>
+                    <li class="header-menu-overlay__item">
+                        <a href="#" class="header-menu-overlay__link"> Blog </a>
+                    </li>
+                    <li class="header-menu-overlay__item">
+                        <a href="#" class="header-menu-overlay__link"> Contact us </a>
+                    </li>
+                    <li class="header-menu-overlay__item">
+                        <a href="#" class="header-menu-overlay__link"> Shop </a>
+                    </li>
+                </ul>
+                <a class="header-menu-overlay__close" href="#">
+                    <i class="fas fa-times fa-3x"></i>
+                </a>
+            </div>
         </div>
     </header>
     <div class="page">
     </div>
 </body>
+
 </html>

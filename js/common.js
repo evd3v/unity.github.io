@@ -5,8 +5,8 @@ window.onload = function() {
     let sizeOfHeader = 100;
 
     let checkHeaderSize = function() {
-        console.dir(header);
-        console.log(document.documentElement.clientWidth);
+        // console.dir(header);
+        // console.log(document.documentElement.clientWidth);
         if(header.offsetWidth > document.documentElement.clientWidth / 1.5) {
             headerText.style.fontSize = sizeOfHeader-- + "px";
             checkHeaderSize();
@@ -27,6 +27,7 @@ window.onload = function() {
         element.innerHTML = '';
         element.classList.remove('play-video__text--in');
         element.classList.remove('play-video__text--out');
+        element.style.display = "block";
         setTimeout(() => {
             element.classList.add('play-video__text--in');
             playVideoText.forEach(function(char, index) {
@@ -42,20 +43,33 @@ window.onload = function() {
         setTimeout(() => {
             element.classList.add('play-video__text--out');
         }, 200);
+        setTimeout(() => {
+            element.style.display = "none";
+        }, 400);
     };
+
+    $(".header-menu__link").click(function() {
+        $(".header-menu-overlay__list")[0].style.opacity = "1";
+        $(".header-menu-overlay")[0].style.width = "100%";
+    });
+
+    $(".header-menu-overlay__close").click(function() {
+        $(".header-menu-overlay")[0].style.width = "0";
+        $(".header-menu-overlay__list")[0].style.opacity = "0";
+    });
 
 
     // Example 1: From an element in DOM
-    $('.open-popup-link').magnificPopup({
-        type:'inline',
-        removalDelay: 500, //delay removal by X to allow out-animation
-        // fixedContentPos: false,
-        callbacks: {
-            beforeOpen: function() {
-            this.st.mainClass = this.st.el.attr('data-effect');
-            },
-        },
-        midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
-     });
+    // $('.open-popup-link').magnificPopup({
+    //     type:'inline',
+    //     removalDelay: 500, //delay removal by X to allow out-animation
+    //     // fixedContentPos: false,
+    //     callbacks: {
+    //         beforeOpen: function() {
+    //         this.st.mainClass = this.st.el.attr('data-effect');
+    //         },
+    //     },
+    //     midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+    //  });
   
 };
