@@ -50,16 +50,20 @@ window.onload = function() {
         }, 400);
     };
 
+    /* preventDefault links */
+
+    $("a").click(function(e) {
+        e.preventDefault();
+    });
+
     /* overlay-menu */
 
     $(".header-menu__link").click(function(e) {
-        e.preventDefault();
         $(".header-menu-overlay__list")[0].style.opacity = "1";
         $(".header-menu-overlay")[0].style.width = "100%";
     });
 
     $(".header-menu-overlay__close").click(function(e) {
-        e.preventDefault();
         $(".header-menu-overlay")[0].style.width = "0";
         $(".header-menu-overlay__list")[0].style.opacity = "0";
     });
@@ -86,4 +90,52 @@ window.onload = function() {
         },
         midClick: true, // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
     });
+
+    /* servise slider */
+	let wrapper = document.querySelector('body');
+	let op = document.querySelector(".service-slider__wrapper");
+	wrapper.ondragstart = function() { return false;};
+
+	op.onmousedown = function(event) {
+		op.style.cursor = "move";
+		let startOffset = op.getBoundingClientRect().left - 15;
+		let startX = event.clientX;
+		op.onmousemove = function(e) {
+			let offsetX = startX - e.clientX;
+			if(event.target.classList.contains('first') && offsetX < 0) {
+				op.style.left = startOffset - offsetX / 10 + "px";
+			} else
+			if(event.target.classList.contains('second') && offsetX > 0)
+			{
+				op.style.left = startOffset - offsetX / 10 + "px";
+			} else {
+			op.style.left = startOffset - offsetX + "px";
+			}
+		}	
+		document.onmouseup = function(e) {
+			console.log('start ' + startOffset);
+			
+			let finalOffsetX = startX - e.clientX;
+			let finalLeft = startOffset + 550;
+			console.log('finalLeft ' + finalLeft);
+			if(event.target.classList.contains('first') && finalOffsetX < 0) {
+				op.style.left = 0 + "px";
+			} else if(event.target.classList.contains('second') && (finalOffsetX > 0 || finalLeft > 0)) {
+				op.style.left = -550 + "px";
+			} else if(finalLeft < -550) {
+				op.style.left = -550 + "px";
+			} else if(finalLeft < 0) {
+			op.style.left = 0 + "px";
+			} else
+			if (Math.abs(finalOffsetX) > 0) {
+				if(finalOffsetX < 0) {
+					op.style.left = startOffset + 550 + "px";
+				} else if(finalOffsetX > 0) {
+					op.style.left = startOffset - 550 + "px";
+				}
+			}
+			op.onmousemove = null;
+			op.onmouseup = null;
+		}
+	}
 };
