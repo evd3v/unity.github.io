@@ -92,50 +92,64 @@ window.onload = function() {
     });
 
     /* servise slider */
-	let wrapper = document.querySelector('body');
-	let op = document.querySelector(".service-slider__wrapper");
-	wrapper.ondragstart = function() { return false;};
+	let body = document.querySelector('body');
+	let serviseSlider = document.querySelector(".service-slider__wrapper");
+	body.ondragstart = function() { return false;}; /* disable drag&drop */
 
-	op.onmousedown = function(event) {
-		op.style.cursor = "move";
-		let startOffset = op.getBoundingClientRect().left - 15;
-		let startX = event.clientX;
-		op.onmousemove = function(e) {
-			let offsetX = startX - e.clientX;
-			if(event.target.classList.contains('first') && offsetX < 0) {
-				op.style.left = startOffset - offsetX / 10 + "px";
+	serviseSlider.onmousedown = function(event) {
+        serviseSlider.style.cursor = "move";
+        let elemWidth = event.target.getBoundingClientRect().width;
+        let startOffset = serviseSlider.getBoundingClientRect().left;
+        let startX = event.clientX;
+		serviseSlider.onmousemove = function(e) {
+            let offsetX = startX - e.clientX;
+            console.log(event.target);
+            // console.log(event.target.parentNode.classList.contains('service-slider-item--first'));
+            // console.log(offsetX);
+			if((event.target.parentNode.classList.contains('service-slider-item--first') || event.target.classList.contains('service-slider-item--first'))  && offsetX < 0) {
+                console.log(11);
+				serviseSlider.style.left = -offsetX / 10 + "px";
 			} else
-			if(event.target.classList.contains('second') && offsetX > 0)
+			if((event.target.parentNode.classList.contains('service-slider-item--last') || event.target.classList.contains('service-slider-item--first')) && offsetX > 0)
 			{
-				op.style.left = startOffset - offsetX / 10 + "px";
+                console.log(12);
+				serviseSlider.style.left = startOffset - 225 - offsetX / 10 + "px";
 			} else {
-			op.style.left = startOffset - offsetX + "px";
+                console.log(13);
+                serviseSlider.style.left = startOffset - offsetX - 225 + "px";
 			}
 		}	
 		document.onmouseup = function(e) {
-			console.log('start ' + startOffset);
+			// console.log('start ' + startOffset);
 			
 			let finalOffsetX = startX - e.clientX;
-			let finalLeft = startOffset + 550;
-			console.log('finalLeft ' + finalLeft);
+			let finalLeft =  elemWidth;
+			// console.log('finalLeft ' + finalLeft);
 			if(event.target.classList.contains('first') && finalOffsetX < 0) {
-				op.style.left = 0 + "px";
+                console.log(1);
+				serviseSlider.style.left = 0 + "px";
 			} else if(event.target.classList.contains('second') && (finalOffsetX > 0 || finalLeft > 0)) {
-				op.style.left = -550 + "px";
-			} else if(finalLeft < -550) {
-				op.style.left = -550 + "px";
+                serviseSlider.style.left = -elemWidth + "px";
+                console.log(2);
+			} else if(finalLeft < -elemWidth) {
+                serviseSlider.style.left = -elemWidth + "px";
+                console.log(3);
 			} else if(finalLeft < 0) {
-			op.style.left = 0 + "px";
+                serviseSlider.style.left = 0 + "px";
+                console.log(4);
 			} else
 			if (Math.abs(finalOffsetX) > 0) {
 				if(finalOffsetX < 0) {
-					op.style.left = startOffset + 550 + "px";
+                    serviseSlider.style.left =  0 + "px";
+                    // console.log(6);
 				} else if(finalOffsetX > 0) {
-					op.style.left = startOffset - 550 + "px";
+                    serviseSlider.style.left =  -elemWidth + "px";
+                    // console.log(7);
 				}
 			}
-			op.onmousemove = null;
-			op.onmouseup = null;
+			serviseSlider.onmousemove = null;
+            serviseSlider.onmouseup = null;
+            serviseSlider.style.cursor = "auto";
 		}
 	}
 };

@@ -347,9 +347,8 @@ body {
 .service-slider {
   position: relative;
   width: 40%;
-  height: 80vh;
+  height: 85vh;
   z-index: 101;
-  background: green;
   overflow: hidden; }
 
 .service-slider__wrapper {
@@ -362,6 +361,10 @@ body {
 
 .service-slider-item {
   font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   font-weight: 400;
   position: absolute;
   margin-top: 10vh;
