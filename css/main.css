@@ -326,11 +326,8 @@ body {
   position: absolute;
   z-index: -100;
   width: 100%;
-  top: -150px;
-  overflow: hidden;
-  -webkit-transition: all ease .1s;
-  -o-transition: all ease .1s;
-  transition: all ease .1s; }
+  top: -75px;
+  overflow: hidden; }
 
 .page-z {
   z-index: 100;

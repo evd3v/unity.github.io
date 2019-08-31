@@ -74,7 +74,7 @@ window.onload = function() {
     $(window).scroll(function() {
         let scrollPosition = $(this).scrollTop();
         $(".page-bg").css({
-            "transform": "translate(0%, " + scrollPosition / 20 + "%)",
+            "transform": "translate(0, " + scrollPosition / 20 + "%)",
         });
     });
 
