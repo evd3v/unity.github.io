@@ -73,8 +73,9 @@ window.onload = function() {
 
     $(window).scroll(function() {
         let scrollPosition = $(this).scrollTop();
+        this.console.log(scrollPosition);
         $(".page-bg").css({
-            "transform": "translate(0, " + scrollPosition / 20 + "%)",
+            "transform": "translate(0, " + scrollPosition / 5 + "px)",
         });
     });
 

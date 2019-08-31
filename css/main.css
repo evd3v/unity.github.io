@@ -63,10 +63,6 @@ body {
   position: relative;
   /* for mobile desives */ }
 
-.page--bg {
-  background: url("../img/bg.jpg") no-repeat;
-  background-position: bottom; }
-
 .logo {
   width: 150px;
   height: 50px;
