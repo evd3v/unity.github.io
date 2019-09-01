@@ -73,9 +73,8 @@ window.onload = function() {
 
     $(window).scroll(function() {
         let scrollPosition = $(this).scrollTop();
-        this.console.log(scrollPosition);
         $(".page-bg").css({
-            "transform": "translate(0, " + scrollPosition / 5 + "px)",
+            "transform": "translate(0, " + scrollPosition / 20 + "%)",
         });
     });
 
@@ -95,62 +94,114 @@ window.onload = function() {
     /* servise slider */
 	let body = document.querySelector('body');
 	let serviseSlider = document.querySelector(".service-slider__wrapper");
-	body.ondragstart = function() { return false;}; /* disable drag&drop */
+    body.ondragstart = function() { return false;}; /* disable drag&drop */
+    const itemWidth = $(".service-slider-item")[0].getBoundingClientRect().width; /* to determine width of the item */
+    let startPosition = 0; /* начальная координата от края блока */
 
 	serviseSlider.onmousedown = function(event) {
         serviseSlider.style.cursor = "move";
-        let elemWidth = event.target.getBoundingClientRect().width;
-        let startOffset = serviseSlider.getBoundingClientRect().left;
-        let startX = event.clientX;
+        let currentOffset = Math.abs(startPosition) + event.offsetX; // расстояние от левого края блока wrapper до точки клика
+        let startX = event.offsetX; // координата точки клика относительно текущего блока
+        let startOffsetX = event.clientX; // координата точки клика относительно окна браузера
+        console.log(event.clientX);
 		serviseSlider.onmousemove = function(e) {
-            let offsetX = startX - e.clientX;
-            console.log(event.target);
-            // console.log(event.target.parentNode.classList.contains('service-slider-item--first'));
-            // console.log(offsetX);
-			if((event.target.parentNode.classList.contains('service-slider-item--first') || event.target.classList.contains('service-slider-item--first'))  && offsetX < 0) {
-                console.log(11);
-				serviseSlider.style.left = -offsetX / 10 + "px";
+            let offsetX = startOffsetX - e.clientX; // расстояние, на которое сдвинулась мышь от места клика
+			if( 0 < currentOffset && currentOffset < itemWidth && offsetX < 0) {
+				serviseSlider.style.left = startPosition - offsetX / 10 + "px";
 			} else
-			if((event.target.parentNode.classList.contains('service-slider-item--last') || event.target.classList.contains('service-slider-item--first')) && offsetX > 0)
+			if( itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX > 0)
 			{
-                console.log(12);
-				serviseSlider.style.left = startOffset - 225 - offsetX / 10 + "px";
-			} else {
-                console.log(13);
-                serviseSlider.style.left = startOffset - offsetX - 225 + "px";
-			}
+				serviseSlider.style.left = startPosition - offsetX / 10 + "px";
+            } else
+            if( offsetX > 0 ){
+                serviseSlider.style.left = startPosition - offsetX + "px"; // двигаем блок влево 
+            } else 
+            if ( offsetX < 0) {
+                serviseSlider.style.left = startPosition + Math.abs(offsetX) + "px"; // двигаем блок вправо 
+            }
+
+            document.onmouseup = function(e) {
+                if( 0 < currentOffset && currentOffset < itemWidth && offsetX > 0) {
+                    serviseSlider.style.left = startPosition - itemWidth + 'px';
+                    startPosition -= itemWidth;
+                } else 
+                if ( 0 < currentOffset && currentOffset < itemWidth && offsetX < 0) {
+                    serviseSlider.style.left = startPosition + 'px';
+                } else 
+                if (itemWidth < currentOffset && currentOffset < itemWidth * 2 && offsetX > 0) {
+                    serviseSlider.style.left = startPosition - itemWidth + 'px';
+                    startPosition -= itemWidth;
+                } else 
+                if (itemWidth < currentOffset && currentOffset < itemWidth * 2 && offsetX < 0) {
+                    serviseSlider.style.left = startPosition + itemWidth + 'px';
+                    startPosition += itemWidth;
+                } else 
+                if (itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX > 0) {
+                    serviseSlider.style.left = startPosition + 'px';
+                } else
+                if (itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX < 0) {
+                    serviseSlider.style.left = startPosition + itemWidth + 'px';
+                    startPosition += itemWidth;
+                }
+
+                serviseSlider.onmousemove = null;
+                serviseSlider.onmouseup = null;
+                serviseSlider.style.cursor = "auto";
+            }
+
 		}	
-		document.onmouseup = function(e) {
-			// console.log('start ' + startOffset);
-			
-			let finalOffsetX = startX - e.clientX;
-			let finalLeft =  elemWidth;
-			// console.log('finalLeft ' + finalLeft);
-			if(event.target.classList.contains('first') && finalOffsetX < 0) {
-                console.log(1);
-				serviseSlider.style.left = 0 + "px";
-			} else if(event.target.classList.contains('second') && (finalOffsetX > 0 || finalLeft > 0)) {
-                serviseSlider.style.left = -elemWidth + "px";
-                console.log(2);
-			} else if(finalLeft < -elemWidth) {
-                serviseSlider.style.left = -elemWidth + "px";
-                console.log(3);
-			} else if(finalLeft < 0) {
-                serviseSlider.style.left = 0 + "px";
-                console.log(4);
+
+    }
+    
+    serviseSlider.ontouchstart = function(event) {
+        let currentOffset = Math.abs(startPosition) + event.touches[0].clientX; // расстояние от левого края блока wrapper до точки клика
+        let startX = event.offsetX; // координата точки клика относительно текущего блока
+        let startOffsetX = event.touches[0].clientX; // координата точки клика относительно окна браузера
+		serviseSlider.ontouchmove = function(e) {
+            let offsetX = startOffsetX - e.touches[0].clientX; // расстояние, на которое сдвинулась мышь от места клика
+			if( 0 < currentOffset && currentOffset < itemWidth && offsetX < 0) {
+				serviseSlider.style.left = startPosition - offsetX / 20 + "px";
 			} else
-			if (Math.abs(finalOffsetX) > 0) {
-				if(finalOffsetX < 0) {
-                    serviseSlider.style.left =  0 + "px";
-                    // console.log(6);
-				} else if(finalOffsetX > 0) {
-                    serviseSlider.style.left =  -elemWidth + "px";
-                    // console.log(7);
-				}
-			}
-			serviseSlider.onmousemove = null;
-            serviseSlider.onmouseup = null;
-            serviseSlider.style.cursor = "auto";
+			if( itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX > 0)
+			{
+				serviseSlider.style.left = startPosition - offsetX / 20 + "px";
+            } else
+            if( offsetX > 0 ){
+                serviseSlider.style.left = startPosition - offsetX + "px"; // двигаем блок влево 
+            } else 
+            if ( offsetX < 0) {
+                serviseSlider.style.left = startPosition + Math.abs(offsetX) + "px"; // двигаем блок вправо 
+            }
+            serviseSlider.ontouchend = function() {
+                console.log(currentOffset);
+                console.log(offsetX);
+                console.log(startPosition - itemWidth);
+                if( 0 < currentOffset && currentOffset < itemWidth && offsetX > 0) {
+                    serviseSlider.style.left = startPosition - itemWidth + 'px';
+                    startPosition -= itemWidth;
+                } else 
+                if ( 0 < currentOffset && currentOffset < itemWidth && offsetX < 0) {
+                    serviseSlider.style.left = startPosition + 'px';
+                } else 
+                if (itemWidth < currentOffset && currentOffset < itemWidth * 2 && offsetX > 0) {
+                    serviseSlider.style.left = startPosition - itemWidth + 'px';
+                    startPosition -= itemWidth;
+                } else 
+                if (itemWidth < currentOffset && currentOffset < itemWidth * 2 && offsetX < 0) {
+                    serviseSlider.style.left = startPosition + itemWidth + 'px';
+                    startPosition += itemWidth;
+                } else 
+                if (itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX > 0) {
+                    serviseSlider.style.left = startPosition + 'px';
+                } else
+                if (itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX < 0) {
+                    serviseSlider.style.left = startPosition + itemWidth + 'px';
+                    startPosition += itemWidth;
+                }
+                serviseSlider.ontouchmove = null;
+                serviseSlider.ontouchend = null;
+            }
 		}
-	}
+    }
+
 };

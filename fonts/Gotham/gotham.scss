@@ -1,12 +1,143 @@
-@font-face {
-    font-family: 'Gotham';
-    src: url('../fonts/Gotham/Gotham-Medium.eot');
-    src: url('../fonts/Gotham/Gotham-Medium.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/Gotham/Gotham-Medium.woff2') format('woff2'),
-        url('../fonts/Gotham/Gotham-Medium.woff') format('woff'),
-        url('../fonts/Gotham/Gotham-Medium.ttf') format('truetype'),
-        url('../fonts/Gotham/Gotham-Medium.svg#Gotham-Medium') format('svg');
-    font-weight: 500;
-    font-style: normal;
-}
 
+@font-face {
+    font-family: 'Gotham Book';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Book'), url('GothamBook.woff') format('woff');
+    }
+    
+    
+    @font-face {
+    font-family: 'Gotham Book Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Book Italic'), url('GothamBookItalic.woff') format('woff');
+    }
+    
+    
+    @font-face {
+    font-family: 'Gotham Light';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Light'), url('GothamLight.woff') format('woff');
+    }
+    
+    
+    @font-face {
+    font-family: 'Gotham Light Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Light Italic'), url('GothamLightItalic.woff') format('woff');
+    }
+    
+    
+    @font-face {
+    font-family: 'Gotham Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Medium'), url('GothamMedium.woff') format('woff');
+    }
+    
+    
+    @font-face {
+    font-family: 'Gotham Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Medium'), url('GothamMedium_1.woff') format('woff');
+    }
+    
+    
+    @font-face {
+    font-family: 'Gotham Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Medium'), url('GothamMediumItalic.woff') format('woff');
+    }
+    
+    
+    @font-face {
+    font-family: 'Gotham Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Bold'), url('GothamBold.woff') format('woff');
+    }
+    
+    
+    @font-face {
+    font-family: 'Gotham Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Bold'), url('Gotham-Bold.woff') format('woff');
+    }
+    
+    
+    @font-face {
+    font-family: 'Gotham Bold Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Bold Italic'), url('GothamBoldItalic.woff') format('woff');
+    }
+    
+    
+    @font-face {
+    font-family: 'Gotham Black Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Black Regular'), url('Gotham-Black.woff') format('woff');
+    }
+    
+    
+    @font-face {
+    font-family: 'Gotham Light Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Light Regular'), url('Gotham-Light.woff') format('woff');
+    }
+    
+    
+    @font-face {
+    font-family: 'Gotham Thin Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Thin Regular'), url('Gotham-Thin.woff') format('woff');
+    }
+    
+    
+    @font-face {
+    font-family: 'Gotham XLight Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham XLight Regular'), url('Gotham-XLight.woff') format('woff');
+    }
+    
+    
+    @font-face {
+    font-family: 'Gotham Book Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Book Italic'), url('Gotham-BookItalic.woff') format('woff');
+    }
+    
+    
+    @font-face {
+    font-family: 'Gotham Thin Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Thin Italic'), url('Gotham-ThinItalic.woff') format('woff');
+    }
+    
+    
+    @font-face {
+    font-family: 'Gotham Ultra Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Ultra Italic'), url('Gotham-UltraItalic.woff') format('woff');
+    }
+    
+    
+    @font-face {
+    font-family: 'Gotham XLight Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham XLight Italic'), url('Gotham-XLightItalic.woff') format('woff');
+    }
