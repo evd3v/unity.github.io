@@ -106,10 +106,10 @@ window.onload = function() {
         console.log(event.clientX);
 		serviseSlider.onmousemove = function(e) {
             let offsetX = startOffsetX - e.clientX; // расстояние, на которое сдвинулась мышь от места клика
-			if( 0 < currentOffset && currentOffset < itemWidth && offsetX < 0) {
+			if( 0 < currentOffset && currentOffset < itemWidth && offsetX < 0 ) {
 				serviseSlider.style.left = startPosition - offsetX / 10 + "px";
 			} else
-			if( itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX > 0)
+			if( itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX > 0 )
 			{
 				serviseSlider.style.left = startPosition - offsetX / 10 + "px";
             } else
@@ -121,25 +121,25 @@ window.onload = function() {
             }
 
             document.onmouseup = function(e) {
-                if( 0 < currentOffset && currentOffset < itemWidth && offsetX > 0) {
+                if( 0 < currentOffset && currentOffset < itemWidth && offsetX > 0 ) {
                     serviseSlider.style.left = startPosition - itemWidth + 'px';
                     startPosition -= itemWidth;
                 } else 
-                if ( 0 < currentOffset && currentOffset < itemWidth && offsetX < 0) {
+                if ( 0 < currentOffset && currentOffset < itemWidth && offsetX < 0 ) {
                     serviseSlider.style.left = startPosition + 'px';
                 } else 
-                if (itemWidth < currentOffset && currentOffset < itemWidth * 2 && offsetX > 0) {
+                if ( itemWidth < currentOffset && currentOffset < itemWidth * 2 && offsetX > 0 ) {
                     serviseSlider.style.left = startPosition - itemWidth + 'px';
                     startPosition -= itemWidth;
                 } else 
-                if (itemWidth < currentOffset && currentOffset < itemWidth * 2 && offsetX < 0) {
+                if ( itemWidth < currentOffset && currentOffset < itemWidth * 2 && offsetX < 0 ) {
                     serviseSlider.style.left = startPosition + itemWidth + 'px';
                     startPosition += itemWidth;
                 } else 
-                if (itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX > 0) {
+                if ( itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX > 0 ) {
                     serviseSlider.style.left = startPosition + 'px';
                 } else
-                if (itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX < 0) {
+                if ( itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX < 0 ) {
                     serviseSlider.style.left = startPosition + itemWidth + 'px';
                     startPosition += itemWidth;
                 }
@@ -159,7 +159,7 @@ window.onload = function() {
         let startOffsetX = event.touches[0].clientX; // координата точки клика относительно окна браузера
 		serviseSlider.ontouchmove = function(e) {
             let offsetX = startOffsetX - e.touches[0].clientX; // расстояние, на которое сдвинулась мышь от места клика
-			if( 0 < currentOffset && currentOffset < itemWidth && offsetX < 0) {
+			if( 0 < currentOffset && currentOffset < itemWidth && offsetX < 0 ) {
 				serviseSlider.style.left = startPosition - offsetX / 20 + "px";
 			} else
 			if( itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX > 0)
@@ -173,30 +173,30 @@ window.onload = function() {
                 serviseSlider.style.left = startPosition + Math.abs(offsetX) + "px"; // двигаем блок вправо 
             }
             serviseSlider.ontouchend = function() {
-                console.log(currentOffset);
-                console.log(offsetX);
-                console.log(startPosition - itemWidth);
-                if( 0 < currentOffset && currentOffset < itemWidth && offsetX > 0) {
+                if( 0 < currentOffset && currentOffset < itemWidth && offsetX > 0 ) {
                     serviseSlider.style.left = startPosition - itemWidth + 'px';
                     startPosition -= itemWidth;
                 } else 
-                if ( 0 < currentOffset && currentOffset < itemWidth && offsetX < 0) {
+                if ( 0 < currentOffset && currentOffset < itemWidth && offsetX < 0 ) {
                     serviseSlider.style.left = startPosition + 'px';
                 } else 
-                if (itemWidth < currentOffset && currentOffset < itemWidth * 2 && offsetX > 0) {
+                if ( itemWidth < currentOffset && currentOffset < itemWidth * 2 && offsetX > 0 ) {
                     serviseSlider.style.left = startPosition - itemWidth + 'px';
                     startPosition -= itemWidth;
                 } else 
-                if (itemWidth < currentOffset && currentOffset < itemWidth * 2 && offsetX < 0) {
+                if ( itemWidth < currentOffset && currentOffset < itemWidth * 2 && offsetX < 0 ) {
                     serviseSlider.style.left = startPosition + itemWidth + 'px';
                     startPosition += itemWidth;
                 } else 
-                if (itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX > 0) {
+                if ( itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX > 0 ) {
                     serviseSlider.style.left = startPosition + 'px';
                 } else
-                if (itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX < 0) {
+                if ( itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX < 0) {
                     serviseSlider.style.left = startPosition + itemWidth + 'px';
                     startPosition += itemWidth;
+                } else 
+                if  ( currentOffset > itemWidth * 3 && offsetX > 0 ) {
+                    serviseSlider.style.left = startPosition + 'px';
                 }
                 serviseSlider.ontouchmove = null;
                 serviseSlider.ontouchend = null;
