@@ -59,13 +59,23 @@ window.onload = function() {
     /* overlay-menu */
 
     $(".header-menu__link").click(function(e) {
-        $(".header-menu-overlay__list")[0].style.opacity = "1";
-        $(".header-menu-overlay")[0].style.width = "100%";
+        $(".header-menu-overlay__list").css({
+            'opacity': '1',
+        });
+        $(".header-menu-overlay").css({
+            'width': '100%',
+            'visibility': 'visible',
+        });
     });
 
     $(".header-menu-overlay__close").click(function(e) {
-        $(".header-menu-overlay")[0].style.width = "0";
-        $(".header-menu-overlay__list")[0].style.opacity = "0";
+        $(".header-menu-overlay").css({
+            'width': '0%',
+            'visibility': 'hidden',
+        });
+        $(".header-menu-overlay__list").css({
+            'opacity': '0',
+        })
     });
 
 
@@ -78,18 +88,40 @@ window.onload = function() {
         });
     });
 
-    /* video popup */
+    let scrollHeight = Math.max(
+        document.body.scrollHeight, document.documentElement.scrollHeight,
+        document.body.offsetHeight, document.documentElement.offsetHeight,
+        document.body.clientHeight, document.documentElement.clientHeight
+    );
 
-    $(".play-video").magnificPopup({
-        delegate: 'a',
-        removalDelay: 500, //delay removal by X to allow out-animation
-        callbacks: {
-          beforeOpen: function() {
-             this.st.mainClass = this.st.el.attr('data-effect');
-          }
-        },
-        midClick: true, // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
-    });
+    $(".play-video__link")[0].onclick = function() {
+        $(".play-video__content").css({
+            'visibility': 'visible',
+            'opacity': '1',
+            'transform': 'scale(1)',
+        });
+        $('.page__firstpage-overlay').css({
+            'visibility' : 'visible', 
+            'height' : scrollHeight + 'px',
+            'width' : '100%',
+            'opacity': '0.75',
+        });
+    }
+
+    $(".play-video__close")[0].onclick = function() {
+        $(".play-video__content").css({
+            'visibility': 'hidden',
+            'opacity': '0',
+            'transform': 'scale(0)',
+        });
+        $('.page__firstpage-overlay').css({
+            'visibility' : 'hidden', 
+            'opacity' : '0',
+        });
+        $(".play-video__close").css({
+            'transform': 'rotate(720deg)',
+        })
+    }
 
     /* servise slider */
 	let body = document.querySelector('body');
@@ -107,11 +139,11 @@ window.onload = function() {
 		serviseSlider.onmousemove = function(e) {
             let offsetX = startOffsetX - e.clientX; // расстояние, на которое сдвинулась мышь от места клика
 			if( 0 < currentOffset && currentOffset < itemWidth && offsetX < 0 ) {
-				serviseSlider.style.left = startPosition - offsetX / 10 + "px";
+				serviseSlider.style.left = startPosition - offsetX / 5 + "px";
 			} else
 			if( itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX > 0 )
 			{
-				serviseSlider.style.left = startPosition - offsetX / 10 + "px";
+				serviseSlider.style.left = startPosition - offsetX / 5 + "px";
             } else
             if( offsetX > 0 ){
                 serviseSlider.style.left = startPosition - offsetX + "px"; // двигаем блок влево 
@@ -160,11 +192,11 @@ window.onload = function() {
 		serviseSlider.ontouchmove = function(e) {
             let offsetX = startOffsetX - e.touches[0].clientX; // расстояние, на которое сдвинулась мышь от места клика
 			if( 0 < currentOffset && currentOffset < itemWidth && offsetX < 0 ) {
-				serviseSlider.style.left = startPosition - offsetX / 20 + "px";
+				serviseSlider.style.left = startPosition - offsetX / 10 + "px";
 			} else
 			if( itemWidth * 2 < currentOffset && currentOffset < itemWidth * 3 && offsetX > 0)
 			{
-				serviseSlider.style.left = startPosition - offsetX / 20 + "px";
+				serviseSlider.style.left = startPosition - offsetX / 10 + "px";
             } else
             if( offsetX > 0 ){
                 serviseSlider.style.left = startPosition - offsetX + "px"; // двигаем блок влево 

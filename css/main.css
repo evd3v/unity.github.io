@@ -146,7 +146,19 @@ body {
   -webkit-box-align: center;
   -webkit-align-items: center;
       -ms-flex-align: center;
-          align-items: center; }
+          align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start; }
+  @media screen and (max-width: 1024px) {
+    .wrapper-flex {
+      height: -webkit-calc(var(--vh, 1vh) * 100);
+      height: calc(var(--vh, 1vh) * 100);
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+          -ms-flex-pack: center;
+              justify-content: center; } }
 
 /* header page */
 .page {
@@ -280,44 +292,57 @@ body {
   margin-top: -0.5rem; }
 
 /* video popup styles */
-.white-popup {
-  position: relative;
-  padding: 25px;
-  width: auto;
-  max-width: 400px;
-  margin: 0 auto; }
+.play-video__iframe {
+  width: 50vw;
+  height: 50vh; }
+  @media (max-width: 800px) {
+    .play-video__iframe {
+      width: 75vw; } }
 
-.mfp-zoom-in {
-  /* start state */
-  /* animate in */
-  /* animate out */ }
-  .mfp-zoom-in .mfp-with-anim {
-    opacity: 0;
-    -webkit-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-    -webkit-transform: scale(0.8);
-        -ms-transform: scale(0.8);
-            transform: scale(0.8); }
-  .mfp-zoom-in.mfp-bg {
-    opacity: 0;
-    -webkit-transition: all 0.3s ease-out;
-    -o-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out; }
-  .mfp-zoom-in.mfp-ready .mfp-with-anim {
-    opacity: 1;
-    -webkit-transform: scale(1);
-        -ms-transform: scale(1);
-            transform: scale(1); }
-  .mfp-zoom-in.mfp-ready.mfp-bg {
-    opacity: 0.8; }
-  .mfp-zoom-in.mfp-removing .mfp-with-anim {
-    -webkit-transform: scale(0.8);
-        -ms-transform: scale(0.8);
-            transform: scale(0.8);
-    opacity: 0; }
-  .mfp-zoom-in.mfp-removing.mfp-bg {
-    opacity: 0; }
+.play-video__content {
+  visibility: hidden;
+  position: fixed;
+  -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
+  opacity: 0;
+  z-index: 103;
+  width: 50vw;
+  height: 50vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  -webkit-transition: all ease 1s;
+  -o-transition: all ease 1s;
+  transition: all ease 1s; }
+  @media (max-width: 800px) {
+    .play-video__content {
+      width: 75vw; } }
+
+.play-video__close {
+  position: absolute;
+  width: 22px;
+  height: 32px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  color: #fff;
+  left: 100%;
+  bottom: 60%;
+  -webkit-transition: all ease 1s;
+  -o-transition: all ease 1s;
+  transition: all ease 1s; }
+  @media (max-height: 1280px) {
+    .play-video__close {
+      bottom: 120%; } }
+  @media (max-width: 800px) {
+    .play-video__close {
+      bottom: 75%;
+      left: 100%; } }
 
 /* end video popup styles */
 .discover-btn {
@@ -355,6 +380,7 @@ body {
 
 .header-menu-overlay {
   position: fixed;
+  visibility: hidden;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -410,20 +436,39 @@ body {
   .header-menu-overlay__link:hover {
     color: blueviolet; }
 
-.page-bg {
-  background: url("../img/bg.jpg");
-  background-position: center;
+.page__firstpage-bg {
+  background: url("../img/bg.jpg") no-repeat;
+  background-position: bottom;
   height: -webkit-calc(var(--vh, 1vh) * 100 + 150px);
   height: calc(var(--vh, 1vh) * 100 + 150px);
-  background-color: #666;
   position: absolute;
   z-index: -100;
   width: 100%;
   top: -75px;
   overflow: hidden; }
   @media (max-height: 800px) {
-    .page-bg {
+    .page__firstpage-bg {
       top: 25px; } }
+  @media (max-height: 1195px) {
+    .page__firstpage-bg {
+      background-position: center; } }
+  @media (max-width: 800px) {
+    .page__firstpage-bg {
+      height: -webkit-calc(var(--vh, 1vh) * 100);
+      height: calc(var(--vh, 1vh) * 100);
+      top: 0; } }
+
+.page__firstpage-overlay {
+  visibility: hidden;
+  position: absolute;
+  background: #000;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  z-index: 102;
+  -webkit-transition: all ease 1s;
+  -o-transition: all ease 1s;
+  transition: all ease 1s; }
 
 .page-z {
   z-index: 100;
@@ -449,9 +494,9 @@ body {
 
 .service-slider__wrapper {
   position: absolute;
-  -webkit-transition: all ease-out .2s;
-  -o-transition: all ease-out .2s;
-  transition: all ease-out .2s;
+  -webkit-transition: all ease .2s;
+  -o-transition: all ease .2s;
+  transition: all ease .2s;
   width: 100%;
   margin-top: 10vh; }
 

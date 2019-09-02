@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="fonts/fontawesome/css/all.css" rel="stylesheet">
-    <link href="css/libs.min.css" rel="stylesheet">
+    <!-- <link href="css/libs.min.css" rel="stylesheet"> -->
     <link href="css/main.css" rel="stylesheet">
     <script src="js/libs.min.js"></script>
     <script src="js/common.js"></script>
@@ -36,12 +36,13 @@
                 </h1>
             </div>
             <div class="play-video">
-                <a class="play-video__link" data-effect="mfp-zoom-in" href="#play-video__content">
+                <a class="play-video__link" href="#">
                     <i class="fas fa-play play-video--icon"></i>
                 </a>
                 <p class="play-video__text play-video__text--in play-video__text--out"> </p>
-                <div class="white-popup mfp-with-anim mfp-hide" id="play-video__content">
-                        <iframe title="vimeo-player" src="https://player.vimeo.com/video/142874198" frameborder="0" allowfullscreen></iframe>
+                <div class="play-video__content">
+                        <a class="play-video__close" href="#"><i class="fas fa-times fa-2x"></i></a>
+                        <iframe class="play-video__iframe" title="vimeo-player" src="https://player.vimeo.com/video/142874198" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
             <a class="discover-btn discover-btn--wrapper" href="#">
@@ -79,7 +80,9 @@
                 </a>
             </div>
         </div>
-        <div class="page-bg">
+        <div class="page__firstpage-bg">
+        </div>
+        <div class="page__firstpage-overlay">
         </div>
     </header>
     <section class="page page-z">
