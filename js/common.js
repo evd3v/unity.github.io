@@ -106,6 +106,9 @@ window.onload = function() {
             'width' : '100%',
             'opacity': '0.75',
         });
+        $(".play-video__close").css({
+            'transform': 'rotate(720deg)',
+        })
     }
 
     $(".play-video__close")[0].onclick = function() {
@@ -119,7 +122,7 @@ window.onload = function() {
             'opacity' : '0',
         });
         $(".play-video__close").css({
-            'transform': 'rotate(720deg)',
+            'transform': 'rotate(0deg)',
         })
     }
 
@@ -235,5 +238,28 @@ window.onload = function() {
             }
 		}
     }
+
+    /* slider-paginator */
+    $.each($(".service-slider__paginator-link"), function(element) {
+        element.onclick = function(event) {
+            event.preventDefault();
+        }
+    });
+
+    let paginators = $('.service-slider__paginator')[0].children;
+    for(let i = 0; i < paginators.length; i++) {
+        let numberOfElements;
+        paginators[i].onclick = function() {
+            numberOfElements = i;
+            serviseSlider.style.left = -(numberOfElements * itemWidth) + 'px';
+            for(let j = 0; j < paginators.length; j++) {
+                console.dir(paginators[j].children[0].classList);
+                paginators[j].children[0].classList.remove('paginator-item--selected');
+            }
+            paginators[i].children[0].classList.add('paginator-item--selected');
+        }
+    }
+
+
 
 };

@@ -470,11 +470,15 @@ body {
   -o-transition: all ease 1s;
   transition: all ease 1s; }
 
-.page-z {
-  z-index: 100;
-  background: #fff; }
-
 /* second page */
+.second-page {
+  z-index: 100;
+  background: #fff;
+  height: 90vh;
+  height: -webkit-calc(var(--vh, 1vh) * 90);
+  height: calc(var(--vh, 1vh) * 90);
+  /* fix for mobile devises */ }
+
 .service-slider__overlay {
   position: absolute;
   width: 100%;
@@ -491,6 +495,9 @@ body {
   @media (max-width: 1170px) {
     .service-slider {
       margin-left: 1rem; } }
+  @media screen and (max-width: 800px) {
+    .service-slider {
+      height: 60vh; } }
 
 .service-slider__wrapper {
   position: absolute;
@@ -551,3 +558,38 @@ body {
 .service-slider-item__mark {
   pointer-events: none;
   /* disable onclick (for correctly working slider) */ }
+
+.service-slider__paginator {
+  list-style: none;
+  padding: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+  @media (max-width: 1170px) {
+    .service-slider__paginator {
+      margin-left: 1rem; } }
+
+.service-slider__paginator-item {
+  margin-right: 1rem;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #000;
+  border-radius: 100%;
+  text-align: center;
+  font-family: 'Gotham', Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  line-height: 50px; }
+  .service-slider__paginator-item:hover {
+    background: #ff5617;
+    border-color: #ff5617;
+    color: #fff; }
+
+.service-slider__paginator-link {
+  text-decoration: none;
+  color: #000; }
+
+.paginator-item--selected {
+  background: #ff5617;
+  border-color: #ff5617;
+  color: #fff; }
