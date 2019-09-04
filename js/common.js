@@ -170,25 +170,25 @@ window.onload = function () {
                             currentOffsetX /= 5;
                             nextElement = i /* если двигаем слайдер за границу - следующий слайд = текущий слайд */
                         }
-                    
-                    console.log(-Math.abs(currentElement * itemWidth) + currentOffsetX);
-                    slider.css({
-                        'left': -Math.abs(currentElement * itemWidth) + currentOffsetX + 'px',
-                    });
+                        slider.css({
+                            'left': -Math.abs(currentElement * itemWidth) + currentOffsetX + 'px',
+                        });
+                   
                     
                     $(document).bind('mouseup touchend', function() {
-
-                        slider.css({
-                            'left': -Math.abs(nextElement * itemWidth) + 'px',
-                            'cursor': 'auto',
-                        });
-
-                        /* changePaginator */
-
-                        $.each(paginators, function(i, element) {
-                            $(element).removeClass('paginator-item--selected')
-                        })
-                        $(paginators[nextElement]).addClass('paginator-item--selected');
+                        if ( Math.abs(currentOffsetX) > itemWidth / 20) {
+                            slider.css({
+                                'left': -Math.abs(nextElement * itemWidth) + 'px',
+                                'cursor': 'auto',
+                            });
+    
+                            /* changePaginator */
+    
+                            $.each(paginators, function(i, element) {
+                                $(element).removeClass('paginator-item--selected')
+                            })
+                            $(paginators[nextElement]).addClass('paginator-item--selected');
+                        }
 
                         $(element).unbind('mousemove touchmove');
                         $(document).unbind('mouseup touchend');

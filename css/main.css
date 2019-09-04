@@ -580,3 +580,30 @@ body {
   background: #ff5617;
   border-color: #ff5617;
   color: #fff; }
+
+.devises-slider {
+  position: relative;
+  width: 40%;
+  height: 40vh;
+  overflow: hidden; }
+
+.devises-slider__item {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  top: 0; }
+
+.devises-slider__item--second {
+  left: 100%; }
+
+.devises-slider__image {
+  z-index: 103;
+  height: 1032px;
+  width: 936px; }
+
+.devises-slider__image--mac {
+  background: url("../img/mac.png") no-repeat;
+  background-size: contain;
+  height: 500px;
+  width: 500px; }
