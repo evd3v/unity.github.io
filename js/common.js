@@ -82,7 +82,8 @@ window.onload = function () {
 
     /* bg-parallax effect on scroll */
 
-    $(window).scroll(function () {
+    $(window).scroll(function (e) {
+        this.console.log(e);
         let scrollPosition = $(this).scrollTop();
         $(".page__firstpage-bg").css({
             "transform": "translate(0, " + scrollPosition / 20 + "%)",
