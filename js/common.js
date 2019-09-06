@@ -136,7 +136,12 @@ window.onload = function () {
 
         let elementsCount = $(slides).length; /* определяем количество слайдов */
         let slideOffset = 0;
-        const itemWidth = $(slides)[0].clientWidth; /* определяем ширину блока */
+        let itemWidth = 0;
+        if(document.documentElement.clientWidth < 800) {
+            itemWidth = $(slides)[0].clientWidth * 1.1; /* определяем ширину блока */
+        } else {
+            itemWidth = $(slides)[0].clientWidth; /* определяем ширину блока */
+        }
 
         slider.css({
             'left': '0px', /* задаем начальный стиль для слайдера (необходимо для анимации) */
@@ -267,7 +272,7 @@ window.onload = function () {
                         });
                     
                     $(document).bind('mouseup touchend', function() {
-                            console.log(nextElement);
+                            console.log('tyt');
                             slider.css({
                                 'left': -Math.abs(nextElement * itemWidth) + 'px',
                                 'cursor': 'auto',
