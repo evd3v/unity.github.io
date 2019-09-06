@@ -137,7 +137,6 @@ window.onload = function () {
         let elementsCount = $(slides).length; /* определяем количество слайдов */
         let slideOffset = 0;
         const itemWidth = $(slides)[0].clientWidth; /* определяем ширину блока */
-        console.dir(itemWidth);
 
         slider.css({
             'left': '0px', /* задаем начальный стиль для слайдера (необходимо для анимации) */
@@ -254,24 +253,21 @@ window.onload = function () {
                 $(element).bind('mousemove touchmove', function (event) {
                     let movedOffsetX = event.clientX || event.touches[0].clientX;
                     let currentOffsetX = movedOffsetX - startOffsetX /* расстояние, на которое сдвинулась мышь после клика */
-                    // console.log(currentOffsetX);
                     let nextElement = currentElement; /* следующий слайд */
 
                     currentOffsetX > 0 ? nextElement-- : nextElement++; /* определяем номер следующего слайда */
 
                     if ((currentElement == 0 && currentOffsetX > 0) ||
-                        (currentElement == elementsCount - 1 && currentOffsetX < 0)) {
+                        (currentElement == (elementsCount - 1) && currentOffsetX < 0) || currentOffsetX == 0) {
                             currentOffsetX /= 5;
                             nextElement = i /* если двигаем слайдер за границу - следующий слайд = текущий слайд */
                         }
-
                         slider.css({
                             'left': -Math.abs(currentElement * itemWidth) + currentOffsetX + 'px',
                         });
-                    console.log(currentOffsetX);
                     
                     $(document).bind('mouseup touchend', function() {
-                            console.log('tyt');
+                            console.log(nextElement);
                             slider.css({
                                 'left': -Math.abs(nextElement * itemWidth) + 'px',
                                 'cursor': 'auto',
