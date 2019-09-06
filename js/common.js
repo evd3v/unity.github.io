@@ -233,7 +233,7 @@ window.onload = function () {
         }
 
         let itemWidth = 0;
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             itemWidth = document.documentElement.clientWidth; /* определяем ширину блока */
           } else {
             itemWidth = $(slides)[0].clientWidth - slideOffset; /* определяем ширину блока */

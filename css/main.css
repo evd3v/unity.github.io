@@ -553,6 +553,9 @@ body {
   @media screen and (max-width: 1000px) {
     .second-page {
       height: 130vh; } }
+  @media screen and (max-height: 600px) {
+    .second-page {
+      height: 150vh; } }
 
 .service-slider__overlay {
   position: absolute;
@@ -575,6 +578,9 @@ body {
   @media screen and (max-width: 400px) {
     .service-slider {
       height: 60vh; } }
+  @media screen and (max-height: 600px) {
+    .service-slider {
+      height: 80vh; } }
 
 .service-slider__wrapper {
   position: absolute;
@@ -701,7 +707,7 @@ body {
   padding-left: 20%; }
   @media screen and (max-width: 1200px) {
     .devises-slider {
-      width: 45%;
+      width: 40%;
       bottom: 0;
       height: 70vh; } }
   @media screen and (max-width: 1000px) {
@@ -711,7 +717,7 @@ body {
       padding-left: 0; } }
   @media screen and (max-width: 400px) {
     .devises-slider {
-      height: 60vh; } }
+      height: 55vh; } }
 
 .devises-slider__wrapper {
   position: absolute;
@@ -751,9 +757,12 @@ body {
   @media screen and (max-width: 1000px) {
     .devises-slider-item-wrapper {
       width: 40%; } }
+  @media screen and (max-width: 600px) {
+    .devises-slider-item-wrapper {
+      width: 60%; } }
   @media screen and (max-width: 400px) {
     .devises-slider-item-wrapper {
-      height: 40vh; } }
+      height: 45vh; } }
 
 .devises-slider__image {
   position: absolute;
@@ -767,7 +776,11 @@ body {
     .devises-slider__image {
       left: -15%;
       top: -35%;
-      width: 60vw; } }
+      width: 50vw; } }
+  @media screen and (max-width: 600px) {
+    .devises-slider__image {
+      width: 80vw;
+      left: -25%; } }
 
 .devises-slider__image--mac {
   background: url("../img/mac.png") no-repeat;
@@ -809,6 +822,9 @@ body {
     .devises-slider-paginator__button {
       position: absolute;
       width: 6vw; } }
+  @media screen and (max-width: 600px) {
+    .devises-slider-paginator__button {
+      width: 10vw; } }
 
 @media screen and (max-width: 1000px) {
   .devises-slider-paginator__button--left {
