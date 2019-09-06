@@ -53,6 +53,7 @@ window.onload = function () {
     /* preventDefault links */
 
     $("a").click(function (e) {
+        console.log(e.target);
         e.preventDefault();
     });
 
@@ -225,7 +226,13 @@ window.onload = function () {
         if(document.documentElement.clientWidth < 1024) {
             slideOffset = 0;
         }
-        const itemWidth = $(slides)[0].clientWidth - slideOffset; /* определяем ширину блока */
+
+        let itemWidth = 0;
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            itemWidth = document.documentElement.clientWidth; /* определяем ширину блока */
+          } else {
+            itemWidth = $(slides)[0].clientWidth - slideOffset; /* определяем ширину блока */
+        }
 
         // slider.css({
             // 'left': '0px', /* задаем начальный стиль для слайдера (необходимо для анимации) */
@@ -273,9 +280,9 @@ window.onload = function () {
                             /* changePaginator */
     
                             $.each(paginators, function(i, element) {
-                                $(element).removeClass('paginator-item--selected')
+                                $(element).removeClass('devises-slider-paginator--selected')
                             })
-                            $(paginators[nextElement]).addClass('paginator-item--selected');
+                            $(paginators[nextElement]).addClass('devises-slider-paginator--selected');
 
                         $(element).unbind('mousemove touchmove');
                         $(document).unbind('mouseup touchend');
