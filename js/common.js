@@ -1,5 +1,6 @@
 window.onload = function () {
 
+
     /* resize the header text on resize window */
 
     let header = document.querySelector(".header");
@@ -136,12 +137,15 @@ window.onload = function () {
     let serviceSliderOn = function (slider, slides, paginators) {
 
         let elementsCount = $(slides).length; /* определяем количество слайдов */
-        let slideOffset = 0;
+        let slideOffset = 0 
+        if(document.documentElement.clientWidth < 1024) {
+            slideOffset = 0;
+        }
         let itemWidth = 0;
         if(document.documentElement.clientWidth < 800) {
             itemWidth = $(slides)[0].clientWidth * 1.1; /* определяем ширину блока */
         } else {
-            itemWidth = $(slides)[0].clientWidth; /* определяем ширину блока */
+            itemWidth = $(slides)[0].clientWidth - slideOffset; /* определяем ширину блока */
         }
 
         slider.css({
@@ -149,10 +153,10 @@ window.onload = function () {
         });
 
         $.each(slides, function (i, element) {
-            $(element).css({
-                'left': slideOffset + '%'
-            });
-            slideOffset += 100;
+            // $(element).css({
+            //     'left': slidesOffset + '%'
+            // });
+            // slidesOffset += 100;
 
             $(element).bind('mousedown touchstart', function (event) {
                 slider.css({
@@ -164,7 +168,6 @@ window.onload = function () {
                 $(element).bind('mousemove touchmove', function (event) {
                     let movedOffsetX = event.clientX || event.touches[0].clientX;
                     let currentOffsetX = movedOffsetX - startOffsetX /* расстояние, на которое сдвинулась мышь после клика */
-                    // console.log(currentOffsetX);
                     let nextElement = currentElement; /* следующий слайд */
 
                     currentOffsetX > 0 ? nextElement-- : nextElement++; /* определяем номер следующего слайда */
@@ -224,103 +227,113 @@ window.onload = function () {
     serviceSliderOn(slider, slides, paginators);
 
 
-    let serviceSliderOn2 = function (slider, slides, paginators) {
+    // let serviceSliderOn2 = function (slider, slides, paginators) {
 
-        let elementsCount = $(slides).length; /* определяем количество слайдов */
-        let slideOffset = 200;
-        if(document.documentElement.clientWidth < 1024) {
-            slideOffset = 0;
-        }
+    //     let elementsCount = $(slides).length; /* определяем количество слайдов */
+    //     let slideOffset = 200;
+    //     if(document.documentElement.clientWidth < 1024) {
+    //         slideOffset = 0;
+    //     }
 
-        let itemWidth = 0;
-        if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            itemWidth = document.documentElement.clientWidth; /* определяем ширину блока */
-          } else {
-            itemWidth = $(slides)[0].clientWidth - slideOffset; /* определяем ширину блока */
-        }
+    //     let itemWidth = 0;
+    //     if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    //         itemWidth = document.documentElement.clientWidth; /* определяем ширину блока */
+    //       } else {
+    //         itemWidth = $(slides)[0].clientWidth - slideOffset; /* определяем ширину блока */
+    //     }
 
-        // slider.css({
-            // 'left': '0px', /* задаем начальный стиль для слайдера (необходимо для анимации) */
-        // });
+    //     // slider.css({
+    //         // 'left': '0px', /* задаем начальный стиль для слайдера (необходимо для анимации) */
+    //     // });
 
-        $.each(slides, function (i, element) {
-            // $(element).css({
-            //     'left': slideOffset + '%'
-            // });
-            // slideOffset += 100;
+    //     $.each(slides, function (i, element) {
+    //         // $(element).css({
+    //         //     'left': slideOffset + '%'
+    //         // });
+    //         // slideOffset += 100;
 
-            $(element).bind('mousedown touchstart', function (event) {
-                slider.css({
-                    'cursor': 'move',
-                });
+    //         $(element).bind('mousedown touchstart', function (event) {
+    //             slider.css({
+    //                 'cursor': 'move',
+    //             });
 
-                let startOffsetX = event.clientX || event.touches[0].clientX; /* координата точки клика относительно окна браузера */
-                let currentElement = i; /* определяем на какой элемент кликнули */
-                $(element).bind('mousemove touchmove', function (event) {
-                    let movedOffsetX = event.clientX || event.touches[0].clientX;
-                    let currentOffsetX = movedOffsetX - startOffsetX /* расстояние, на которое сдвинулась мышь после клика */
-                    let nextElement = currentElement; /* следующий слайд */
+    //             let startOffsetX = event.clientX || event.touches[0].clientX; /* координата точки клика относительно окна браузера */
+    //             let currentElement = i; /* определяем на какой элемент кликнули */
+    //             $(element).bind('mousemove touchmove', function (event) {
+    //                 let movedOffsetX = event.clientX || event.touches[0].clientX;
+    //                 let currentOffsetX = movedOffsetX - startOffsetX /* расстояние, на которое сдвинулась мышь после клика */
+    //                 let nextElement = currentElement; /* следующий слайд */
 
-                    currentOffsetX > 0 ? nextElement-- : nextElement++; /* определяем номер следующего слайда */
+    //                 currentOffsetX > 0 ? nextElement-- : nextElement++; /* определяем номер следующего слайда */
 
-                    if ((currentElement == 0 && currentOffsetX > 0) ||
-                        (currentElement == (elementsCount - 1) && currentOffsetX < 0) || currentOffsetX == 0) {
-                            currentOffsetX /= 5;
-                            nextElement = i /* если двигаем слайдер за границу - следующий слайд = текущий слайд */
-                        }
-                        slider.css({
-                            'left': -Math.abs(currentElement * itemWidth) + currentOffsetX + 'px',
-                        });
+    //                 if ((currentElement == 0 && currentOffsetX > 0) ||
+    //                     (currentElement == (elementsCount - 1) && currentOffsetX < 0) || currentOffsetX == 0) {
+    //                         currentOffsetX /= 5;
+    //                         nextElement = i /* если двигаем слайдер за границу - следующий слайд = текущий слайд */
+    //                     }
+    //                     slider.css({
+    //                         'left': -Math.abs(currentElement * itemWidth) + currentOffsetX + 'px',
+    //                     });
                     
-                    $(document).bind('mouseup touchend', function() {
-                            console.log('tyt');
-                            slider.css({
-                                'left': -Math.abs(nextElement * itemWidth) + 'px',
-                                'cursor': 'auto',
-                            });
+    //                 $(document).bind('mouseup touchend', function() {
+    //                         console.log('tyt');
+    //                         slider.css({
+    //                             'left': -Math.abs(nextElement * itemWidth) + 'px',
+    //                             'cursor': 'auto',
+    //                         });
     
-                            /* changePaginator */
+    //                         /* changePaginator */
     
-                            $.each(paginators, function(i, element) {
-                                $(element).removeClass('devises-slider-paginator--selected')
-                            })
-                            $(paginators[nextElement]).addClass('devises-slider-paginator--selected');
+    //                         $.each(paginators, function(i, element) {
+    //                             $(element).removeClass('devises-slider-paginator--selected')
+    //                         })
+    //                         $(paginators[nextElement]).addClass('devises-slider-paginator--selected');
 
-                        $(element).unbind('mousemove touchmove');
-                        $(document).unbind('mouseup touchend');
+    //                     $(element).unbind('mousemove touchmove');
+    //                     $(document).unbind('mouseup touchend');
 
-                    });
-                });
-            });
-        });
+    //                 });
+    //             });
+    //         });
+    //     });
 
-        /* slider paginator */
-        $.each(paginators, function(i, element) {
-            $(element).bind('click touch', function() {
-                $.each(paginators, function(i, element) {
-                    $(element).removeClass('devises-slider-paginator--selected')
-                })
-                $(paginators[i]).addClass('devises-slider-paginator--selected');
+    //     /* slider paginator */
+    //     $.each(paginators, function(i, element) {
+    //         $(element).bind('click touch', function() {
+    //             $.each(paginators, function(i, element) {
+    //                 $(element).removeClass('devises-slider-paginator--selected')
+    //             })
+    //             $(paginators[i]).addClass('devises-slider-paginator--selected');
 
-                slider.css({
-                    'left': -Math.abs(i * itemWidth) + 'px',
-                });
-            });
-        });
+    //             slider.css({
+    //                 'left': -Math.abs(i * itemWidth) + 'px',
+    //             });
+    //         });
+    //     });
 
-    };
+    // };
 
 
 
     let slider1 = $('.devises-slider__wrapper');
     let slides1 = $('.devises-slider__wrapper .devises-slider__item');
     let paginators1 = $('.devises-slider-paginator__button');
-    serviceSliderOn2(slider1, slides1, paginators1);
+    serviceSliderOn(slider1, slides1, paginators1);
 
     window.onclick = function(e) {
         console.log(e.target);
     }
 
+
+        /* resize for mobile devises */
+    let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+    window.addEventListener('resize', () => {
+        // We execute the same script as before
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+      });
 
 
 };
