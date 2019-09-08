@@ -54,7 +54,6 @@ window.onload = function () {
     /* preventDefault links */
 
     $("a").click(function (e) {
-        console.log(e.target);
         e.preventDefault();
     });
 
@@ -133,197 +132,105 @@ window.onload = function () {
         event.preventDefault(); /* запрещаем тянучку блоков */
     };
 
-    /* servise slider */
-    let serviceSliderOn = function (slider, slides, paginators) {
+    /* servise slider on JQ */
 
-        let elementsCount = $(slides).length; /* определяем количество слайдов */
-        let slideOffset = 0 
-        if(document.documentElement.clientWidth < 1024) {
-            slideOffset = 0;
-        }
-        let itemWidth = 0;
-        if(document.documentElement.clientWidth < 800) {
-            itemWidth = $(slides)[0].clientWidth * 1.1; /* определяем ширину блока */
-        } else {
-            itemWidth = $(slides)[0].clientWidth - slideOffset; /* определяем ширину блока */
-        }
+    let sliderOn = function(params) {
 
-        slider.css({
-            'left': '0px', /* задаем начальный стиль для слайдера (необходимо для анимации) */
-        });
+        let slider = params.slider;
+        let slides = params.slides;
+        let paginator = params.paginator;
+        let selectedPaginator = params.selectedPaginator;
 
-        $.each(slides, function (i, element) {
-            // $(element).css({
-            //     'left': slidesOffset + '%'
-            // });
-            // slidesOffset += 100;
+        let slidesCount = slides.length; /* определяем количество слайдов */
+        let slideWidth = slides[0].clientWidth; /* определяем ширину одного блока */
 
-            $(element).bind('mousedown touchstart', function (event) {
+        let currentSlide = 0;
+        let startPoint = 0;
+        let endPoint = 0;
+        
+        let currentOffset = 0;
+        let isOffsetPositive = false;
+        let finalOffset = 0;
+        let nextSlide = 0;
+        
+        slider.bind('mousedown touchstart', function(e) {
+            startPoint = e.clientX; /* точка клика относительно начала окна */
+            currentSlide = Math.ceil(e.offsetX / slideWidth) - 1; /* определяем на какой слайд по счету кликнули */
+            currentOffset = (slideWidth * currentSlide); /* определяем сдвиг относительно начала */
+
+            slider.css({
+                'transition': 'none',
+            });
+
+            slider.bind('mousemove touchmove', function(e) {
+                endPoint = e.clientX - startPoint; /* определяем длину проделанного слайда */
+                isOffsetPositive = endPoint > 0;
+                if( (currentSlide == 0 && isOffsetPositive)
+                        || ((currentSlide + 1) == slidesCount && (!isOffsetPositive)) ) {
+                        endPoint /= 10;
+                        nextSlide = currentSlide;
+                }
+
                 slider.css({
-                    'cursor': 'move',
+                    'transform': 'translateX(' + (endPoint - currentOffset) + 'px)',
                 });
 
-                let startOffsetX = event.clientX || event.touches[0].clientX; /* координата точки клика относительно окна браузера */
-                let currentElement = i; /* определяем на какой элемент кликнули */
-                $(element).bind('mousemove touchmove', function (event) {
-                    let movedOffsetX = event.clientX || event.touches[0].clientX;
-                    let currentOffsetX = movedOffsetX - startOffsetX /* расстояние, на которое сдвинулась мышь после клика */
-                    let nextElement = currentElement; /* следующий слайд */
+                $(document).bind('mouseup touchend', function(e) {
+                    if( (Math.abs(endPoint) < slideWidth / 10) ) {
+                        nextSlide = currentSlide;
+                    } else 
+                    if(isOffsetPositive) {
+                        nextSlide = currentSlide - 1;
+                    } else {
+                        nextSlide = currentSlide + 1;
+                    }
+                    finalOffset = -Math.abs(slideWidth * nextSlide);
 
-                    currentOffsetX > 0 ? nextElement-- : nextElement++; /* определяем номер следующего слайда */
+                    slider.css({
+                            'transform': 'translateX(' + finalOffset + 'px)',
+                            'transition': 'all ease .4s',
+                    });
 
-                    if ((currentElement == 0 && currentOffsetX > 0) ||
-                        (currentElement == elementsCount - 1 && currentOffsetX < 0)) {
-                            currentOffsetX /= 5;
-                            nextElement = i /* если двигаем слайдер за границу - следующий слайд = текущий слайд */
-                        }
+                    $(paginator[currentSlide]).removeClass(selectedPaginator);
+                    $(paginator[nextSlide]).addClass(selectedPaginator);
+
+                    slider.unbind('mousemove touchmove');
+                    $(document).unbind('mouseup touchend');
+                });
+            });
+        });
+        $.each(paginator, function(i, element) {
+                    $(element).bind('click touch', function() {
+                        $.each(paginator, function(i, element) {
+                            $(element).removeClass(selectedPaginator)
+                        })
+                        $(paginator[i]).addClass(selectedPaginator);
+                        console.log(-Math.abs((i+1) * slideWidth))
                         slider.css({
-                            'left': -Math.abs(currentElement * itemWidth) + currentOffsetX + 'px',
+                            'transform': 'translateX(' + -Math.abs(i * slideWidth) + 'px)',
+                            'transition': 'all ease .4s',
                         });
-                   
-                    
-                    $(document).bind('mouseup touchend', function() {
-                        if ( Math.abs(currentOffsetX) > itemWidth / 20) {
-                            slider.css({
-                                'left': -Math.abs(nextElement * itemWidth) + 'px',
-                                'cursor': 'auto',
-                            });
-    
-                            /* changePaginator */
-    
-                            $.each(paginators, function(i, element) {
-                                $(element).removeClass('paginator-item--selected')
-                            })
-                            $(paginators[nextElement]).addClass('paginator-item--selected');
-                        }
-
-                        $(element).unbind('mousemove touchmove');
-                        $(document).unbind('mouseup touchend');
-
                     });
                 });
-            });
-        });
-
-        /* slider paginator */
-        $.each(paginators, function(i, element) {
-            $(element).bind('click touch', function() {
-                $.each(paginators, function(i, element) {
-                    $(element).removeClass('paginator-item--selected')
-                })
-                $(paginators[i]).addClass('paginator-item--selected');
-
-                slider.css({
-                    'left': -Math.abs(i * itemWidth) + 'px',
-                });
-            });
-        });
-
-    };
-
-    let slider = $('.service-slider__wrapper'); /* блок слайдера, который будем двигать */
-    let slides = $('.service-slider__wrapper .service-slider-item'); /* массив слайдов */
-    let paginators = $('.service-slider__paginator li') /* массив пагинаторов */
-    serviceSliderOn(slider, slides, paginators);
-
-
-    // let serviceSliderOn2 = function (slider, slides, paginators) {
-
-    //     let elementsCount = $(slides).length; /* определяем количество слайдов */
-    //     let slideOffset = 200;
-    //     if(document.documentElement.clientWidth < 1024) {
-    //         slideOffset = 0;
-    //     }
-
-    //     let itemWidth = 0;
-    //     if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    //         itemWidth = document.documentElement.clientWidth; /* определяем ширину блока */
-    //       } else {
-    //         itemWidth = $(slides)[0].clientWidth - slideOffset; /* определяем ширину блока */
-    //     }
-
-    //     // slider.css({
-    //         // 'left': '0px', /* задаем начальный стиль для слайдера (необходимо для анимации) */
-    //     // });
-
-    //     $.each(slides, function (i, element) {
-    //         // $(element).css({
-    //         //     'left': slideOffset + '%'
-    //         // });
-    //         // slideOffset += 100;
-
-    //         $(element).bind('mousedown touchstart', function (event) {
-    //             slider.css({
-    //                 'cursor': 'move',
-    //             });
-
-    //             let startOffsetX = event.clientX || event.touches[0].clientX; /* координата точки клика относительно окна браузера */
-    //             let currentElement = i; /* определяем на какой элемент кликнули */
-    //             $(element).bind('mousemove touchmove', function (event) {
-    //                 let movedOffsetX = event.clientX || event.touches[0].clientX;
-    //                 let currentOffsetX = movedOffsetX - startOffsetX /* расстояние, на которое сдвинулась мышь после клика */
-    //                 let nextElement = currentElement; /* следующий слайд */
-
-    //                 currentOffsetX > 0 ? nextElement-- : nextElement++; /* определяем номер следующего слайда */
-
-    //                 if ((currentElement == 0 && currentOffsetX > 0) ||
-    //                     (currentElement == (elementsCount - 1) && currentOffsetX < 0) || currentOffsetX == 0) {
-    //                         currentOffsetX /= 5;
-    //                         nextElement = i /* если двигаем слайдер за границу - следующий слайд = текущий слайд */
-    //                     }
-    //                     slider.css({
-    //                         'left': -Math.abs(currentElement * itemWidth) + currentOffsetX + 'px',
-    //                     });
-                    
-    //                 $(document).bind('mouseup touchend', function() {
-    //                         console.log('tyt');
-    //                         slider.css({
-    //                             'left': -Math.abs(nextElement * itemWidth) + 'px',
-    //                             'cursor': 'auto',
-    //                         });
-    
-    //                         /* changePaginator */
-    
-    //                         $.each(paginators, function(i, element) {
-    //                             $(element).removeClass('devises-slider-paginator--selected')
-    //                         })
-    //                         $(paginators[nextElement]).addClass('devises-slider-paginator--selected');
-
-    //                     $(element).unbind('mousemove touchmove');
-    //                     $(document).unbind('mouseup touchend');
-
-    //                 });
-    //             });
-    //         });
-    //     });
-
-    //     /* slider paginator */
-    //     $.each(paginators, function(i, element) {
-    //         $(element).bind('click touch', function() {
-    //             $.each(paginators, function(i, element) {
-    //                 $(element).removeClass('devises-slider-paginator--selected')
-    //             })
-    //             $(paginators[i]).addClass('devises-slider-paginator--selected');
-
-    //             slider.css({
-    //                 'left': -Math.abs(i * itemWidth) + 'px',
-    //             });
-    //         });
-    //     });
-
-    // };
-
-
-
-    let slider1 = $('.devises-slider__wrapper');
-    let slides1 = $('.devises-slider__wrapper .devises-slider__item');
-    let paginators1 = $('.devises-slider-paginator__button');
-    serviceSliderOn(slider1, slides1, paginators1);
-
-    window.onclick = function(e) {
-        console.log(e.target);
+           
     }
 
+    let serviceSlider = {
+        slider: $('.service-slider__wrapper'),
+        slides: $('.service-slider__wrapper .service-slider__item'),
+        paginator: $('.service-slider-paginator .service-slider-paginator__item'),
+        selectedPaginator: 'servise-slider-paginator__item--selected',
+    };
+
+    let deviseSlider = {
+        slider: $('.devises-slider__wrapper'),
+        slides: $('.devises-slider__wrapper .devises-slider__item'),
+        paginator: $('.devises-slider-paginator .devises-slider-paginator__button'),
+        selectedPaginator: 'devises-slider-paginator--selected',
+    };
+
+    sliderOn(serviceSlider);
+    sliderOn(deviseSlider);
 
         /* resize for mobile devises */
     let vh = window.innerHeight * 0.01;
