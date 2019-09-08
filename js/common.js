@@ -83,7 +83,7 @@ window.onload = function () {
     /* bg-parallax effect on scroll */
 
     $(window).scroll(function (e) {
-        this.console.log(e);
+
         let scrollPosition = $(this).scrollTop();
         $(".page__firstpage-bg").css({
             "transform": "translate(0, " + scrollPosition / 20 + "%)",
@@ -134,6 +134,8 @@ window.onload = function () {
 
     /* servise slider on JQ */
 
+    // class Slider 
+
     let sliderOn = function(params) {
 
         let slider = params.slider;
@@ -144,38 +146,46 @@ window.onload = function () {
         let slidesCount = slides.length; /* определяем количество слайдов */
         let slideWidth = slides[0].clientWidth; /* определяем ширину одного блока */
 
+
         let currentSlide = 0;
         let startPoint = 0;
+        let movePoint = 0;
         let endPoint = 0;
+        let offsetOfSlider = 0;
         
         let currentOffset = 0;
         let isOffsetPositive = false;
         let finalOffset = 0;
         let nextSlide = 0;
+
+        console.log(slider);
         
         slider.bind('mousedown touchstart', function(e) {
-            startPoint = e.clientX; /* точка клика относительно начала окна */
-            currentSlide = Math.ceil(e.offsetX / slideWidth) - 1; /* определяем на какой слайд по счету кликнули */
+            console.log('tyt');
+            let rect = e.target.getBoundingClientRect();
+            startPoint = e.clientX || e.touches[0].clientX; /* точка клика относительно начала окна */
+            offsetOfSlider = e.offsetX || (e.targetTouches[0].pageX - rect.left);
+            currentSlide = Math.ceil(offsetOfSlider / slideWidth) - 1; /* определяем на какой слайд по счету кликнули */
             currentOffset = (slideWidth * currentSlide); /* определяем сдвиг относительно начала */
-
             slider.css({
                 'transition': 'none',
             });
 
             slider.bind('mousemove touchmove', function(e) {
-                endPoint = e.clientX - startPoint; /* определяем длину проделанного слайда */
+                movePoint = e.clientX || e.touches[0].clientX;
+
+                endPoint = movePoint - startPoint; /* определяем длину проделанного слайда */
                 isOffsetPositive = endPoint > 0;
                 if( (currentSlide == 0 && isOffsetPositive)
                         || ((currentSlide + 1) == slidesCount && (!isOffsetPositive)) ) {
                         endPoint /= 10;
                         nextSlide = currentSlide;
                 }
-
                 slider.css({
                     'transform': 'translateX(' + (endPoint - currentOffset) + 'px)',
                 });
 
-                $(document).bind('mouseup touchend', function(e) {
+                $(document).bind('mouseup touchend', function() {
                     if( (Math.abs(endPoint) < slideWidth / 10) ) {
                         nextSlide = currentSlide;
                     } else 
@@ -190,7 +200,6 @@ window.onload = function () {
                             'transform': 'translateX(' + finalOffset + 'px)',
                             'transition': 'all ease .4s',
                     });
-
                     $(paginator[currentSlide]).removeClass(selectedPaginator);
                     $(paginator[nextSlide]).addClass(selectedPaginator);
 
@@ -205,7 +214,6 @@ window.onload = function () {
                             $(element).removeClass(selectedPaginator)
                         })
                         $(paginator[i]).addClass(selectedPaginator);
-                        console.log(-Math.abs((i+1) * slideWidth))
                         slider.css({
                             'transform': 'translateX(' + -Math.abs(i * slideWidth) + 'px)',
                             'transition': 'all ease .4s',
