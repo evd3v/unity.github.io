@@ -82,12 +82,23 @@ window.onload = function () {
 
     /* bg-parallax effect on scroll */
 
+    let firstPageHeight = $('.first-page')[0].clientHeight; /* height of the first page */
+    let secondPageHeight = $('.second-page')[0].clientHeight; /* height of the second page */
+    let offsetY = $(this).innerHeight(); /* height of the visible area */
+    
     $(window).scroll(function (e) {
 
-        let scrollPosition = $(this).scrollTop();
-        $(".page__firstpage-bg").css({
-            "transform": "translate(0, " + scrollPosition / 20 + "%)",
+        let scrollPositionTop = $(this).scrollTop();
+        /* second paralax */
+        if(offsetY + scrollPositionTop > firstPageHeight + secondPageHeight) {
+            $(".third-page__bg").css({
+                'transform': 'translate(0,' + (scrollPositionTop - firstPageHeight - secondPageHeight) / 20 + '%)',
+            });
+        } else {
+            $(".page__firstpage-bg").css({
+                "transform": "translate(0, " + scrollPositionTop / 20 + "%)",
         });
+        }
     });
 
     let scrollHeight = Math.max(
@@ -132,9 +143,7 @@ window.onload = function () {
         event.preventDefault(); /* запрещаем тянучку блоков */
     };
 
-    /* servise slider on JQ */
-
-    // class Slider 
+    /* slider on JQ */
 
     let sliderOn = function(params) {
 
@@ -158,10 +167,8 @@ window.onload = function () {
         let finalOffset = 0;
         let nextSlide = 0;
 
-        console.log(slider);
         
         slider.bind('mousedown touchstart', function(e) {
-            console.log('tyt');
             let rect = e.target.getBoundingClientRect();
             startPoint = e.clientX || e.touches[0].clientX; /* точка клика относительно начала окна */
             offsetOfSlider = e.offsetX || (e.targetTouches[0].pageX - rect.left);
@@ -169,6 +176,9 @@ window.onload = function () {
             currentOffset = (slideWidth * currentSlide); /* определяем сдвиг относительно начала */
             slider.css({
                 'transition': 'none',
+            });
+            $('html').css({
+               'cursor': 'move', 
             });
 
             slider.bind('mousemove touchmove', function(e) {
@@ -205,6 +215,9 @@ window.onload = function () {
 
                     slider.unbind('mousemove touchmove');
                     $(document).unbind('mouseup touchend');
+                    $('html').css({
+                        'cursor': 'auto', 
+                     });
                 });
             });
         });
@@ -237,8 +250,16 @@ window.onload = function () {
         selectedPaginator: 'devises-slider-paginator--selected',
     };
 
+    let aboutSlider = {
+        slider: $('.about-slider__wrapper'),
+        slides: $('.about-slider__wrapper .about-slider__item'),
+        paginator: $('.about-paginator .about-paginator__item'),
+        selectedPaginator: 'about-paginator__item--selected',
+    };
+
     sliderOn(serviceSlider);
     sliderOn(deviseSlider);
+    sliderOn(aboutSlider);
 
         /* resize for mobile devises */
     let vh = window.innerHeight * 0.01;
@@ -249,6 +270,7 @@ window.onload = function () {
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
       });
+
 
 
 };
