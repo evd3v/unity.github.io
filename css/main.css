@@ -911,6 +911,7 @@ body {
       top: 30%; } }
 
 .devises-slider-paginator__button {
+  position: absolute;
   width: 3vw;
   height: 100px;
   background: #FFDD40;
@@ -925,6 +926,12 @@ body {
   @media screen and (max-width: 400px) {
     .devises-slider-paginator__button {
       width: 9vw; } }
+
+.devises-slider-paginator__button--right {
+  right: -6vw; }
+  @media screen and (max-width: 1000px) {
+    .devises-slider-paginator__button--right {
+      right: 0; } }
 
 .devises-slider-paginator--selected {
   background: #000;
