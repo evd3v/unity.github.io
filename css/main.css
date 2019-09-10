@@ -1177,23 +1177,19 @@ body {
       -ms-flex-pack: center;
           justify-content: center; }
 
-.work-page-portfolio__item {
-  position: relative; }
-
 .work-page-portfolio__leftside {
-  margin-right: 2vw; }
+  margin-right: 2rem; }
 
 .work-page-portfolio__item {
-  margin-top: 2vh; }
+  position: relative;
+  margin-top: 2rem; }
 
 .work-page-popover__description {
   position: absolute;
   background: #FFDD40;
-  width: 90%;
+  width: 70%;
   height: 30%;
-  left: 0;
-  right: 0;
-  margin: auto;
+  left: 5%;
   bottom: 2vh;
   color: #fff;
   text-align: left;
@@ -1202,13 +1198,14 @@ body {
           box-sizing: border-box; }
 
 .work-page-popover__title {
-  font-size: 70px;
+  font-size: 60px;
   margin: 0;
-  line-height: 65px; }
+  line-height: 60px; }
 
 .work-page-popover__categorie {
   font-size: 20px;
-  margin: 0; }
+  margin: 0;
+  margin-top: 0.25rem; }
 
 .work-page-popover__view {
   position: absolute;
@@ -1224,4 +1221,4 @@ body {
   color: #fff; }
 
 .work-page-porfolio_offset {
-  height: 800px; }
+  margin-top: 10vh; }
