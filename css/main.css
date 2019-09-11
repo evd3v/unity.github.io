@@ -1162,7 +1162,15 @@ body {
 
 .work-page-menu__link {
   text-decoration: none;
-  color: #000; }
+  color: #000;
+  opacity: 0.5; }
+  .work-page-menu__link:hover {
+    opacity: 1;
+    border-bottom: 2px solid #FFDD40; }
+
+.work-page-menu__link_selected {
+  opacity: 1;
+  border-bottom: 2px solid #FFDD40; }
 
 .work-page-portfolio {
   display: -webkit-box;
@@ -1181,8 +1189,27 @@ body {
   margin-right: 2rem; }
 
 .work-page-portfolio__item {
+  -webkit-transition: all ease .4s;
+  -o-transition: all ease .4s;
+  transition: all ease .4s;
   position: relative;
   margin-top: 2rem; }
+  .work-page-portfolio__item:hover .work-page-popover {
+    opacity: 1;
+    visibility: visible; }
+
+.work-page-portfolio__img {
+  -webkit-transition: all ease .4s;
+  -o-transition: all ease .4s;
+  transition: all ease .4s;
+  height: auto; }
+
+.work-page-popover {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all ease .4s;
+  -o-transition: all ease .4s;
+  transition: all ease .4s; }
 
 .work-page-popover__description {
   position: absolute;
@@ -1219,6 +1246,3 @@ body {
 .work-page-popover__plus {
   line-height: 30px;
   color: #fff; }
-
-.work-page-porfolio_offset {
-  margin-top: 10vh; }

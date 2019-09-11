@@ -1,5 +1,15 @@
 window.onload = function () {
 
+    /* resize for mobile devises */
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+    window.addEventListener('resize', () => {
+        // We execute the same script as before
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+
 
     /* resize the header text on resize window */
 
@@ -261,16 +271,49 @@ window.onload = function () {
     sliderOn(deviseSlider);
     sliderOn(aboutSlider);
 
-        /* resize for mobile devises */
-    let vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    /* work page section */
 
-    window.addEventListener('resize', () => {
-        // We execute the same script as before
-        let vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-      });
+    /* change cards */
+
+    // let portfolioItems = $('.work-page-portfolio .work-page-portfolio__item');
+    // let portfolioItemHeight = portfolioItems[0].clientHeight;
+
+    // let menuItems = $('.work-page-menu .work-page-menu__item');
+    // menuItems[1].onclick = function() {
+    //     let selectedItems = $('.work-page-portfolio__item_photography');
+    //     $.each(selectedItems, function(i, element) {
+    //         $(element).css({
+    //             'max-height': portfolioItemHeight + 'px',
+    //         })
+    //         $(element).css({
+    //             'transition': 'all ease .4s',
+    //             'max-height': '0px',
+    //             'visibility': 'hidden',
+    //         });
+    //         $(element.children[0]).css({
+    //             'transition': 'all ease .4s',
+    //             'max-height': '0px',   
+    //         })
+    //     });
+    // }
 
 
+    // let portfolioImages = $('.work-page-porfolio__img');
+    // $(portfolioItems[0]).css({
+    //     'max-height': portfolioItemHeight + 'px',
+    // });
+    // $(portfolioImages[0]).css({
+    //     'max-height': portfolioItemHeight + 'px',
+    // });
+    // portfolioItems[0].onclick = function() {
+    //     $(portfolioItems[0]).css({
+    //         'transition': 'all ease .4s',
+    //         'max-height': '0px',
+    //     });
+    //     $(portfolioImages[0]).css({
+    //         'transition': 'all ease .4s',
+    //         'max-height': '0px',
+    //     });
+    // }
 
 };
