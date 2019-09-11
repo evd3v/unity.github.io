@@ -122,6 +122,10 @@
   src: local("Gotham XLight Italic"), url("Gotham-XLightItalic.woff") format("woff"); }
 
 /* servises styles */
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+
 html {
   overflow-x: hidden; }
 
@@ -1160,49 +1164,52 @@ body {
       -ms-flex-pack: distribute;
           justify-content: space-around; }
 
-.work-page-menu__link {
-  text-decoration: none;
+.work-page-menu__item {
   color: #000;
   opacity: 0.5; }
-  .work-page-menu__link:hover {
+  .work-page-menu__item:hover {
     opacity: 1;
     border-bottom: 2px solid #FFDD40; }
 
-.work-page-menu__link_selected {
+.work-page-menu__link {
+  text-decoration: none;
+  color: #000; }
+
+.work-page-menu__item_selected {
   opacity: 1;
   border-bottom: 2px solid #FFDD40; }
 
 .work-page-portfolio {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center; }
-
-.work-page-portfolio__leftside {
-  margin-right: 2rem; }
+  margin: 0 auto;
+  /* centered */ }
+  .work-page-portfolio::after {
+    content: '';
+    display: block;
+    clear: both; }
 
 .work-page-portfolio__item {
-  -webkit-transition: all ease .4s;
-  -o-transition: all ease .4s;
-  transition: all ease .4s;
-  position: relative;
-  margin-top: 2rem; }
+  float: left;
+  width: 480px;
+  height: 582px;
+  margin-top: 10px; }
   .work-page-portfolio__item:hover .work-page-popover {
     opacity: 1;
     visibility: visible; }
+  @media screen and (max-width: 600px) {
+    .work-page-portfolio__item {
+      width: 240px;
+      height: 300px; } }
 
-.work-page-portfolio__img {
-  -webkit-transition: all ease .4s;
-  -o-transition: all ease .4s;
-  transition: all ease .4s;
-  height: auto; }
+@media screen and (max-width: 600px) {
+  .work-page-portfolio__img {
+    height: 300px;
+    width: 240px; } }
+
+.work-page-portfolio__item:nth-child(odd) {
+  margin-right: 10px; }
+
+.work-page-portfolio__item_offset {
+  margin-top: 10rem; }
 
 .work-page-popover {
   opacity: 0;
