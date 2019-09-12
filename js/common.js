@@ -275,63 +275,72 @@ window.onload = function () {
 
     /* change cards by isotope */
 
-    if(document.documentElement.clientWidth < 500) {
-        let portfolio = $('.work-page-portfolio').isotope({
-            itemSelector: '.work-page-portfolio__item',
-            transitionDuration: '0.8s',
-            masonry: {
-              columnWidth: 300,
-              isFitWidth: true
-            }
-          });
-    } else {
-        let portfolio = $('.work-page-portfolio').isotope({
-            itemSelector: '.work-page-portfolio__item',
-            transitionDuration: '0.8s',
-            masonry: {
-              columnWidth: 490,
-              isFitWidth: true
-            }
-          });
-    }
+    // let portfolio;
+
+    // if(document.documentElement.clientWidth < 500) {
+    //     portfolio = $('.work-page-portfolio').isotope({
+    //         itemSelector: '.work-page-portfolio__item',
+    //         transitionDuration: '0.8s',
+    //         masonry: {
+    //           columnWidth: 300,
+    //           isFitWidth: true
+    //         }
+    //       });
+    // } else {
+    //     portfolio = $('.work-page-portfolio').isotope({
+    //         itemSelector: '.work-page-portfolio__item',
+    //         transitionDuration: '0.8s',
+    //         masonry: {
+    //           columnWidth: 490,
+    //           isFitWidth: true
+    //         }
+    //       });
+    // }
 
 
-    let menuAll = $('.work-page-menu__item_all')[0];
-    let menuWeb = $('.work-page-menu__item_web')[0];
-    let menuMobile = $('.work-page-menu__item_mobile')[0];
-    let menuPhotography = $('.work-page-menu__item_photography')[0];
+    // let menuAll = $('.work-page-menu__item_all')[0];
+    // let menuWeb = $('.work-page-menu__item_web')[0];
+    // let menuMobile = $('.work-page-menu__item_mobile')[0];
+    // let menuPhotography = $('.work-page-menu__item_photography')[0];
 
-    let allMenu = $('.work-page-menu .work-page-menu__item');
+    // let allMenu = $('.work-page-menu .work-page-menu__item');
 
-    menuAll.onclick = function() {
-        portfolio.isotope({ filter: '.work-page-portfolio__item' });
-        $.each(allMenu, function(i, element) {
-            $(element).removeClass('work-page-menu__item_selected');
-        });
-        $(menuAll).addClass('work-page-menu__item_selected');
-    }
+    // menuAll.onclick = function() {
+    //     portfolio.isotope({ filter: '.work-page-portfolio__item' });
+    //     $.each(allMenu, function(i, element) {
+    //         $(element).removeClass('work-page-menu__item_selected');
+    //     });
+    //     $(menuAll).addClass('work-page-menu__item_selected');
+    // }
 
-    menuWeb.onclick = function() {
-        portfolio.isotope({ filter: '.work-page-portfolio__item_web' });
-        $.each(allMenu, function(i, element) {
-            $(element).removeClass('work-page-menu__item_selected');
-        });
-        $(menuWeb).addClass('work-page-menu__item_selected');
-    }
+    // menuWeb.onclick = function() {
+    //     portfolio.isotope({ filter: '.work-page-portfolio__item_web' });
+    //     $.each(allMenu, function(i, element) {
+    //         $(element).removeClass('work-page-menu__item_selected');
+    //     });
+    //     $(menuWeb).addClass('work-page-menu__item_selected');
+    // }
 
-    menuMobile.onclick = function() {
-        portfolio.isotope({ filter: '.work-page-portfolio__item_mobile' });
-        $.each(allMenu, function(i, element) {
-            $(element).removeClass('work-page-menu__item_selected');
-        });
-        $(menuMobile).addClass('work-page-menu__item_selected');
-    }
+    // menuMobile.onclick = function() {
+    //     portfolio.isotope({ filter: '.work-page-portfolio__item_mobile' });
+    //     $.each(allMenu, function(i, element) {
+    //         $(element).removeClass('work-page-menu__item_selected');
+    //     });
+    //     $(menuMobile).addClass('work-page-menu__item_selected');
+    // }
 
-    menuPhotography.onclick = function() {
-        portfolio.isotope({ filter: '.work-page-portfolio__item_photography' });
-        $.each(allMenu, function(i, element) {
-            $(element).removeClass('work-page-menu__item_selected');
-        });
-        $(menuPhotography).addClass('work-page-menu__item_selected');
-    }
+    // menuPhotography.onclick = function() {
+    //     portfolio.isotope({ filter: '.work-page-portfolio__item_photography' });
+    //     $.each(allMenu, function(i, element) {
+    //         $(element).removeClass('work-page-menu__item_selected');
+    //     });
+    //     $(menuPhotography).addClass('work-page-menu__item_selected');
+    // }
+
+    /* isotop by evg */
+
+    let portfolio = $('.work-page-portfolio');
+    let portfolioItems = $('.work-page-portfolio .work-page-portfolio__item');
+
+    
 };
