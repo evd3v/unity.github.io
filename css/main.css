@@ -174,7 +174,11 @@ body {
 .logo {
   width: 150px;
   height: 50px;
-  background: #000; }
+  background: #000;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
   @media screen and (max-height: 600px) {
     .logo {
       width: 90px;
@@ -255,7 +259,11 @@ body {
   font-weight: normal;
   white-space: nowrap;
   margin: 0;
-  margin-top: 1.5rem; }
+  margin-top: 1.5rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
 
 .play-video__link {
   display: block;
@@ -306,7 +314,11 @@ body {
   text-transform: uppercase;
   font-family: "Gotham Black Regular", Arial, Helvetica, sans-serif;
   letter-spacing: 0.25rem;
-  opacity: 0; }
+  opacity: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
   @media screen and (max-height: 600px) {
     .play-video__text {
       width: 120px;
@@ -398,7 +410,11 @@ body {
   font-family: "Gotham Black Regular", Arial, Helvetica, sans-serif;
   font-size: 16px;
   font-weight: bold;
-  letter-spacing: 0.2rem; }
+  letter-spacing: 0.2rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
   .discover-btn:hover {
     background: none;
     color: #FFDD40;
@@ -464,7 +480,11 @@ body {
   opacity: 0.9;
   -webkit-transition: all ease .5s;
   -o-transition: all ease .5s;
-  transition: all ease .5s; }
+  transition: all ease .5s;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
 
 .header-menu-overlay__close {
   position: absolute;
@@ -575,7 +595,11 @@ body {
   overflow: hidden;
   top: 0;
   bottom: 0;
-  margin: auto 0; }
+  margin: auto 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
   @media screen and (max-width: 1000px) {
     .service-slider {
       top: 0;
@@ -695,7 +719,11 @@ body {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  top: 80%; }
+  top: 80%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
   @media screen and (max-width: 1000px) {
     .service-slider-paginator {
       top: 38%; } }
@@ -1090,6 +1118,7 @@ body {
 .about-paginator {
   position: absolute;
   height: 50vh;
+  width: 3vw;
   right: 0;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1104,21 +1133,34 @@ body {
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
-  list-style: none; }
+  list-style: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
   @media screen and (max-width: 600px), screen and (orientation: landscape) and (max-height: 500px) {
     .about-paginator {
       height: 80vh; } }
 
 .about-paginator__link {
   text-decoration: none; }
+  .about-paginator__link:nth-child(3n + 1) .about-paginator__item {
+    top: 10vh; }
+  .about-paginator__link:nth-child(3n + 2) .about-paginator__item {
+    top: 20vh; }
+  .about-paginator__link:nth-child(3n + 3) .about-paginator__item {
+    top: 30vh; }
 
 .about-paginator__item {
-  display: block;
-  width: 10vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 60px;
   text-align: center;
   padding: 0;
   margin: 0;
   font-size: 60px;
+  line-height: 60px;
   color: #fff;
   opacity: 0.5; }
   .about-paginator__item:hover {

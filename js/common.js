@@ -190,7 +190,7 @@
                     'cursor': 'move',
                 });
 
-                slider.bind('mousemove touchmove', function (e) {
+               slider.bind('mousemove touchmove', function (e) {
                     movePoint = e.clientX || e.touches[0].clientX;
 
                     endPoint = movePoint - startPoint; /* определяем длину проделанного слайда */
@@ -200,6 +200,7 @@
                         endPoint /= 10;
                         nextSlide = currentSlide;
                     }
+
                     slider.css({
                         'transform': 'translateX(' + (endPoint - currentOffset) + 'px)',
                     });
@@ -212,6 +213,9 @@
                             nextSlide = currentSlide - 1;
                         } else {
                             nextSlide = currentSlide + 1;
+                        }
+                        if(nextSlide >= slidesCount || nextSlide < 0) {
+                            nextSlide = currentSlide;
                         }
                         finalOffset = -Math.abs(slideWidth * nextSlide);
 
@@ -229,6 +233,7 @@
                         });
                     });
                 });
+                e.preventDefault();
             });
             $.each(paginator, function (i, element) {
                 $(element).bind('click touch', function () {
