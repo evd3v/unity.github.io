@@ -1215,7 +1215,11 @@ body {
   padding-top: 10rem; }
   @media screen and (max-width: 600px) {
     .work-page-portfolio__item_offset {
-      padding-top: 25px; } }
+      padding-top: 25px; }
+      .work-page-portfolio__item_offset .work-page-popover__view {
+        top: 10%; } }
+  .work-page-portfolio__item_offset .work-page-popover__view {
+    top: 25%; }
 
 .work-page-popover {
   opacity: 0;
@@ -1241,20 +1245,31 @@ body {
   font-size: 60px;
   margin: 0;
   line-height: 60px; }
+  @media screen and (max-width: 600px) {
+    .work-page-popover__title {
+      font-size: 30px;
+      line-height: 30px; } }
 
 .work-page-popover__categorie {
   font-size: 20px;
   margin: 0;
   margin-top: 0.25rem; }
+  @media screen and (max-width: 600px) {
+    .work-page-popover__categorie {
+      font-size: 10px; } }
 
 .work-page-popover__view {
   position: absolute;
   background: #FFDD40;
   width: 30px;
   height: 30px;
-  top: 5%;
-  right: 5%;
+  top: 10%;
+  right: 10%;
   text-align: center; }
+  @media screen and (max-width: 600px) {
+    .work-page-popover__view {
+      top: 15%;
+      right: 15%; } }
 
 .work-page-popover__plus {
   line-height: 30px;
