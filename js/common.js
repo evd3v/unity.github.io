@@ -282,7 +282,7 @@
         function initialize(block, items) {
             let slides = []; /* array with objects */
             let columns;
-            if(document.documentElement.clientWidth < 600) {
+            if(document.documentElement.clientWidth < 600 || (window.screen.orientation.type === "landscape-primary" && document.documentElement.clientHeight < 450)) {
                 columns = 1;
             } else {
                 columns = 2;
@@ -307,7 +307,7 @@
                 if (index % columns == 0) {
                     /* четные элементы, левый столбец */
                     if(columns == 1) {
-                        offsetXeven = currentValue.width - 30;
+                        offsetXeven = currentValue.width;
                     }
                     currentValue.value.style.top = offsetYodd + 'px';
                     currentValue.value.style.left = offsetXodd + 'px';
@@ -387,4 +387,58 @@
             workPageMenuSelected(workPageMenu);
             e.target.classList.add('work-page-menu__item_selected');
         });
+
+        /* popup img */
+
+        let workPagePluses = document.querySelectorAll(".work-page-popover .work-page-popover__plus");
+
+        workPagePluses.forEach(element => {
+            /* ищем картинку, которую необходимо вывести */
+            element.onclick = (e) => {
+                let imgUrl,
+                    imgBlock,
+                    modalBlock,
+                    overlay;
+                e.path.forEach(element => {
+                    if(element.classList && element.classList.contains('work-page-portfolio__item')) {
+                        parentBlock = element;
+                        imgUrl = element.querySelector('img').src;
+                    }
+                });
+                imgBlock = document.createElement('img');
+                imgBlock.src = imgUrl;
+                imgBlock.classList.add("work-page-modal__img");
+
+                modalBlock = document.querySelector(".work-page-modal");
+                modalBlock.appendChild(imgBlock);
+
+
+                overlay = document.querySelector(".work-page-modal-overlay");
+                overlay.style.visibility = "visible";
+                overlay.style.opacity = "0.8";
+
+                modalBlock.style.visibility = "visible";
+                modalBlock.style.opacity = '1';
+            }
+        });
+        let closeWorkPageOverlay = function() {
+            let modalImage = document.querySelector(".work-page-modal img");
+            let overlay = document.querySelector(".work-page-modal-overlay");
+            let modalBlock = document.querySelector(".work-page-modal");
+            overlay.style.visibility = "hidden";
+            overlay.style.opacity = "0";
+
+            modalBlock.style.visibility = "hidden";
+            modalBlock.style.opacity = '0';
+            setTimeout(() => {
+                modalImage.remove();
+            }, 800);
+        };
+
+        let plusWorkPage = document.querySelector(".work-page-modal__plus");
+        plusWorkPage.onclick = closeWorkPageOverlay;
+
+        let overlayWorkPage = document.querySelector(".work-page-modal-overlay");
+        overlayWorkPage.onclick = closeWorkPageOverlay;
+
     };
