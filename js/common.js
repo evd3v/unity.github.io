@@ -223,8 +223,10 @@
                             'transform': 'translateX(' + finalOffset + 'px)',
                             'transition': 'all ease .4s',
                         });
-                        $(paginator[currentSlide]).removeClass(selectedPaginator);
-                        $(paginator[nextSlide]).addClass(selectedPaginator);
+                        if(paginator != null) {
+                            $(paginator[currentSlide]).removeClass(selectedPaginator);
+                            $(paginator[nextSlide]).addClass(selectedPaginator);
+                        }
 
                         slider.unbind('mousemove touchmove');
                         $(document).unbind('mouseup touchend');
@@ -235,18 +237,20 @@
                 });
                 e.preventDefault();
             });
-            $.each(paginator, function (i, element) {
-                $(element).bind('click touch', function () {
-                    $.each(paginator, function (i, element) {
-                        $(element).removeClass(selectedPaginator)
-                    })
-                    $(paginator[i]).addClass(selectedPaginator);
-                    slider.css({
-                        'transform': 'translateX(' + -Math.abs(i * slideWidth) + 'px)',
-                        'transition': 'all ease .4s',
+            if(paginator != null) {
+                $.each(paginator, function (i, element) {
+                    $(element).bind('click touch', function () {
+                        $.each(paginator, function (i, element) {
+                            $(element).removeClass(selectedPaginator)
+                        })
+                        $(paginator[i]).addClass(selectedPaginator);
+                        slider.css({
+                            'transform': 'translateX(' + -Math.abs(i * slideWidth) + 'px)',
+                            'transition': 'all ease .4s',
+                        });
                     });
                 });
-            });
+            }
 
         }
 
@@ -271,10 +275,17 @@
             selectedPaginator: 'about-paginator__item--selected',
         };
 
+        let thanksSlider = {
+            slider: $('.thanks-page-slider__wrapper'),
+            slides: $('.thanks-page-slider__wrapper .thanks-page-slider__item'),
+            paginator: null,
+            selectedPaginator: 'none',
+        }
+
         sliderOn(serviceSlider);
         sliderOn(deviseSlider);
         sliderOn(aboutSlider);
-
+        sliderOn(thanksSlider);
         /* work page section */
 
         /* change cards by isotope */
@@ -304,6 +315,9 @@
                 obj.height = currentValue.clientHeight;
                 obj.resizeWidth = currentValue.clientWidth;
                 slides.push(obj);
+                currentValue.addEventListener('mousedown', function(e) {
+                    e.preventDefault();
+                });
             });
             slides.forEach(function (currentValue, index, arr) {
                 currentValue.value.style.position = 'absolute';
@@ -324,6 +338,7 @@
                     currentValue.value.style.left = offsetXeven + 'px';
                     offsetYeven += currentValue.height;
                 }
+
             });
             block.style.position = 'relative';
             block.style.width = offsetXeven * columns + 'px';
@@ -446,4 +461,7 @@
         let overlayWorkPage = document.querySelector(".work-page-modal-overlay");
         overlayWorkPage.onclick = closeWorkPageOverlay;
 
+        /* features page */
+
+   
     };
